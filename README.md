@@ -1,0 +1,88 @@
+# DHS — Dak Handling System · R1 prototype
+
+A working prototype of the topic-driven system for official correspondence, approvals and records
+across the Zonal Offices.
+
+**It is not a live system.** It runs entirely in the browser, holds no data, stores nothing, and
+sends nothing anywhere. Reloading the page resets it.
+
+---
+
+## Open it
+
+| | |
+|---|---|
+| **The prototype** | [`DHS-R1-Prototype.html`](DHS-R1-Prototype.html) |
+| **Walkthrough deck** | [`DHS-R1-Demo-Presentation.html`](DHS-R1-Demo-Presentation.html) |
+| **Deck as PDF** | [`DHS-R1-Demo-Presentation.pdf`](DHS-R1-Demo-Presentation.pdf) |
+
+Everything is a single self-contained file — it works offline. Download the file and open it in a
+browser if you'd rather not use the hosted page.
+
+---
+
+## Signing in
+
+There is no password. Choose a login from the dropdown at the top of the sidebar; the screen changes
+to what that person would actually see.
+
+Where an approval asks for a one-time code, use **`123456`**.
+
+| Login | Who | What they can do |
+|---|---|---|
+| Secretary — Ludhiana-I | Sh. Balwinder Kakkar | Raises dak for the Satsang Place and signs it |
+| Office Staff — Ludhiana-I | Sh. Ramesh Chander | Drafts and puts up; cannot approve |
+| Care Taker — Chaunta | Sh. Gurdev Singh | A Sub Centre, read-only |
+| Area Secretary — Ludhiana | Sh. Gulshan Dua | Recommends dak onward |
+| Dak Sewadar — Area HQ | Sh. Ranjit Kumar | Marks and puts up at the Area |
+| State Secretary — Punjab | Dr. Lekhi Ji | Decides what the State settles |
+| Zonal Secretary — Zone-II | Sh. Aviraj Singh | Decides what the Zone settles |
+| DHS Admin — Zone-II | Sh. Naresh Gupta | Topics & workflows, users and access |
+| Engineering / Legal / Accounting | Zonal Office departments | See only their own category of dak |
+| 2IC — SCI Office | Col. Ajay Singh | The final approving office |
+
+---
+
+## Worth trying
+
+- **Raise a dak.** *New Dak* → pick a Document Type and Subject. The path, the form and who decides
+  are settled by the topic, not by the person raising it.
+- **Watch the value decide the office.** On an SCI-15, mark items capital or revenue and change the
+  cost — the approving office changes as you type.
+- **Reply and forward.** Open a dak in the Inbox. Recipients are limited to what that dak's own route
+  allows; copies are read-only and never enter anyone's pending list.
+- **Fill an SCI form.** *SCI Forms* → new. Use **Side by side** to watch the official sheet fill in as
+  you type, then open it at actual size.
+- **Approve something.** Any approval asks for the one-time code.
+- **Change the rules.** As DHS Admin, open *Topics & Workflows* and edit a topic — including the value
+  limits. Changes publish a new version; dak already in flight keep the version they started under.
+
+---
+
+## What R1 covers
+
+- Topic-driven routing — the Document Type and Subject settle the path, the mode, the terminal
+  authority, the mandatory forms and the value limits
+- Office-instance scoping — each office sees only its own dak, not everything at its level
+- Roles: signing authority, office staff, read-only, special status, department members, DHS Admin
+- Reply / forward with recipients and copies, bounded by the dak's route
+- SCI-15, SCI-52 and SCI-02 reproduced in the official format, with print and PDF
+- Inward and outward registers, reports, workflow board, calendar with reminders
+- Approval by one-time code
+- Light and dark, and a mobile layout
+
+## What R1 does not cover
+
+- Any connection to SCM or the Beas systems
+- Real authentication — the login switcher is a demonstration device
+- Migration of the existing DHS and DMS records
+- The final numbering convention for all 191 areas (the scheme is settled; the codes are not loaded)
+
+---
+
+## Feedback
+
+Comments are welcome on anything — wording, sequence, what is missing, and above all whether the
+routing matches how the offices actually work.
+
+*September 2026 · Prepared for review by the Zonal Offices and the SCI Office.*

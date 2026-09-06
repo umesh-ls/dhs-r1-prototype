@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>DHS · R1 prototype — for review</title>
+<style>
+  :root{--maroon:#8B0000;--pink:#F0DDDD;--ink:#111827;--txt:#374151;--mut:#6b7280;--mut2:#9ca3af;
+        --bd:#e5e7eb;--bd2:#d1d5db;--surface:#fff;--soft:#fcfcfd;--page:#f3f4f6}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  body{background:var(--page);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:940px;margin:0 auto;padding:34px 20px 60px}
+  .brand{background:var(--surface);border:1px solid var(--bd2);border-radius:14px;padding:26px 28px;position:relative;overflow:hidden}
+  .brand::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--maroon)}
+  .brand h1{font-size:30px;font-weight:800;letter-spacing:5px;color:var(--maroon);line-height:1}
+  .brand .s{font-size:10.5px;color:var(--mut2);margin-top:7px;text-transform:uppercase;letter-spacing:2px;font-weight:600}
+  .brand p{margin-top:14px;font-size:14.5px;color:var(--txt);max-width:64ch}
+  .rel{display:inline-block;margin-top:13px;font-size:11px;font-weight:700;background:var(--pink);color:var(--maroon);
+       border-radius:999px;padding:4px 12px;letter-spacing:.3px}
+  h2{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.3px;color:var(--mut);margin:30px 0 12px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .card{background:var(--surface);border:1px solid var(--bd2);border-radius:12px;padding:18px 19px;display:flex;flex-direction:column}
+  .card h3{font-size:15.5px;color:var(--ink);font-weight:700}
+  .card p{font-size:12.5px;color:var(--mut);margin-top:6px;flex:1}
+  .btn{display:inline-block;margin-top:14px;background:var(--maroon);color:#fff;text-decoration:none;font-size:13px;
+       font-weight:600;border-radius:8px;padding:9px 16px;text-align:center}
+  .btn.alt{background:var(--surface);color:var(--maroon);border:1px solid var(--maroon)}
+  .panel{background:var(--surface);border:1px solid var(--bd2);border-radius:12px;padding:19px 21px}
+  table{width:100%;border-collapse:collapse;margin-top:4px}
+  th,td{text-align:left;padding:7px 9px;font-size:12.5px;border-bottom:1px solid var(--bd)}
+  th{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);font-weight:700;background:var(--soft)}
+  td.r{color:var(--maroon);font-weight:600;white-space:nowrap}
+  .otp{background:var(--pink);border-radius:6px;padding:2px 8px;font-weight:700;color:var(--maroon);
+       font-family:ui-monospace,Menlo,monospace;letter-spacing:1px}
+  .note{font-size:12px;color:var(--mut);margin-top:12px;line-height:1.65}
+  ul{margin:8px 0 0 20px;font-size:13px}
+  li{margin-bottom:5px}
+  .foot{margin-top:34px;font-size:11.5px;color:var(--mut2);text-align:center;line-height:1.7}
+  @media(max-width:560px){ .brand{padding:20px} .wrap{padding:20px 14px 44px} }
+</style></head>
+<body><div class="wrap">
+
+  <div class="brand">
+    <h1>DHS</h1>
+    <div class="s">Dak Handling System &middot; Release 1</div>
+    <p>A working prototype of the topic-driven system for official correspondence, approvals and records
+       across the Zonal Offices. Nothing here is live — it runs entirely in your browser, holds no data,
+       and sends nothing anywhere.</p>
+    <span class="rel">R1 prototype &middot; for review only</span>
+  </div>
+
+  <h2>What to look at</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>The prototype</h3>
+      <p>The system itself. Switch between logins from the sidebar to see the same dak from a Satsang
+         Place, an Area HQ, the State and Zonal Offices and SCI.</p>
+      <a class="btn" href="DHS-R1-Prototype.html">Open the prototype</a>
+    </div>
+    <div class="card">
+      <h3>Walkthrough deck</h3>
+      <p>A narrated tour of the thinking behind it — the problem, the topic-driven approach, and the
+         main screens, with snapshots.</p>
+      <a class="btn alt" href="DHS-R1-Demo-Presentation.html">Open the deck</a>
+      <a class="btn alt" href="DHS-R1-Demo-Presentation.pdf">Download as PDF</a>
+    </div>
+  </div>
+
+  <h2>Signing in</h2>
+  <div class="panel">
+    <p style="font-size:13px">There is no password. Choose a login from the dropdown at the top of the
+       sidebar — the screen changes to what that person would actually see. Where an approval asks for a
+       one-time code, use <span class="otp">123456</span>.</p>
+    <table>
+      <tr><th>Login</th><th>Who they are</th><th>What they can do</th></tr>
+      <tr><td class="r">Secretary — Ludhiana-I</td><td>Sh. Balwinder Kakkar</td><td>Raises dak for the Satsang Place and signs it</td></tr>
+      <tr><td class="r">Office Staff — Ludhiana-I</td><td>Sh. Ramesh Chander</td><td>Drafts and puts up; cannot approve</td></tr>
+      <tr><td class="r">Care Taker — Chaunta</td><td>Sh. Gurdev Singh</td><td>A Sub Centre, read-only</td></tr>
+      <tr><td class="r">Area Secretary — Ludhiana</td><td>Sh. Gulshan Dua</td><td>Recommends dak onward</td></tr>
+      <tr><td class="r">Dak Sewadar — Area HQ</td><td>Sh. Ranjit Kumar</td><td>Marks and puts up at the Area</td></tr>
+      <tr><td class="r">State Secretary — Punjab</td><td>Dr. Lekhi Ji</td><td>Decides what the State settles</td></tr>
+      <tr><td class="r">Zonal Secretary — Zone-II</td><td>Sh. Aviraj Singh</td><td>Decides what the Zone settles</td></tr>
+      <tr><td class="r">DHS Admin — Zone-II</td><td>Sh. Naresh Gupta</td><td>Topics &amp; workflows, users and access</td></tr>
+      <tr><td class="r">Engineering / Legal / Accounting</td><td>Zonal Office departments</td><td>See only their own category of dak</td></tr>
+      <tr><td class="r">2IC — SCI Office</td><td>Col. Ajay Singh</td><td>The final approving office</td></tr>
+    </table>
+  </div>
+
+  <h2>Worth trying</h2>
+  <div class="panel">
+    <ul>
+      <li><b>Raise a dak.</b> New Dak &rarr; pick a Document Type and Subject. The path, the form and who
+          decides are settled by the topic, not by the person raising it.</li>
+      <li><b>Watch the value decide the office.</b> On an SCI-15, mark items capital or revenue and change
+          the cost — the approving office changes as you type.</li>
+      <li><b>Reply and forward.</b> Open a dak in the Inbox. Recipients are limited to what the dak's own
+          route allows; copies are read-only and never enter anyone's pending list.</li>
+      <li><b>Fill an SCI form.</b> SCI Forms &rarr; new. Use <i>Side by side</i> to watch the official
+          sheet fill in as you type, then open it at actual size.</li>
+      <li><b>Approve something.</b> Any approval asks for the one-time code — <span class="otp">123456</span>.</li>
+      <li><b>Change the rules.</b> As DHS Admin, open Topics &amp; Workflows and edit a topic. Changes
+          publish a new version; dak already in flight keep the version they started under.</li>
+    </ul>
+    <p class="note">Everything resets when you reload the page. Feedback is welcome on anything —
+       wording, sequence, what is missing, and above all whether the routing matches how the offices
+       actually work.</p>
+  </div>
+
+  <div class="foot">
+    DHS R1 prototype &middot; September 2026<br>
+    Prepared for review by the Zonal Offices and the SCI Office. Not a live system.
+  </div>
+
+</div></body></html>
