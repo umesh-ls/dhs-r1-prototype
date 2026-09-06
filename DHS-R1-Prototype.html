@@ -599,31 +599,31 @@ function rupee(n){ n=Math.round(+n||0); var s=String(n), r=s.length>3?s.slice(0,
 
 /* ==== items store ==== */
 var ITEMS=[], SEQ=140;
-/* ===================== Dak numbering — Annexure E as settled by C-07 =====================
-   MARKER / AREA / YY / NNNN        e.g.  F52/LDH/26/0482 , L/LDH/26/0231 , C/ZO2/26/0044
+/* ===================== Dak numbering — Annexure E =====================
+   MARKER - YYMMDD - NNNN          e.g.  L-260823-0147 , C-260823-0147 , F52-260823-0147
    · MARKER  L a letter · C a circular · F + the form number for an SCI form
-   · AREA    the area code of the originating office — unique across India (confirmed),
-             which is what makes the whole number unique. Offices above area use their own code.
-   · YY      calendar year. The serial resets on 1 January.
-   · NNNN    one running series per area per year, all types together — the office's dak register.
-   Issued once, at submission. Never re-issued, never changed. Never displayed alone.        */
+   · YYMMDD  the date the item was raised — reads almost as before, and sorts correctly
+   · NNNN    the running number, unique across India FOR THAT DATE — not counted per office.
+             This is what lets any office quote a number and every other office find the item.
+   Issued once, at submission. Never re-issued, never changed. Never displayed alone —
+   the place, area and subject accompany it wherever it appears.                        */
 function areaCodeOf(off){ var k=off, g=0; while(k && OFF[k] && g++<8){ if(OFF[k].level==='area') return k; k=OFF[k].parent; } return off||'SCI'; }
 function markerFor(o){ o=o||{};
   if(o.circular) return 'C';
   if(o.gen) return 'L';
   var f=o.form||''; var m=f.match(/(\d+)/);
   return m? 'F'+m[1] : 'L'; }
-function yy2(dt){ return String((dt||new Date()).getFullYear()).slice(2); }
+function ymd6(dt){ dt=dt||new Date(); var y=String(dt.getFullYear()).slice(2), m=dt.getMonth()+1, d=dt.getDate();
+  return y+(m<10?'0':'')+m+(d<10?'0':'')+d; }
 var NUMSEQ={};
 function pad4(n){ n=String(n); while(n.length<4) n='0'+n; return n; }
-function issueNo(marker, off, dt){
-  var ac=areaCodeOf(off), y=yy2(dt), key=ac+'|'+y;
-  NUMSEQ[key]=(NUMSEQ[key]||0)+1;
-  return marker+'/'+ac+'/'+y+'/'+pad4(NUMSEQ[key]); }
+function issueNo(marker, off, dt){            /* off is not part of the number — the record carries the origin */
+  var key=ymd6(dt); NUMSEQ[key]=(NUMSEQ[key]||0)+1;
+  return marker+'-'+key+'-'+pad4(NUMSEQ[key]); }
 /* seeding only — lets the demo data carry believable, already-used serials */
 function issueNoAt(marker, off, dt, serial){
-  var ac=areaCodeOf(off), y=yy2(dt), key=ac+'|'+y;
-  if(serial!=null){ NUMSEQ[key]=Math.max(NUMSEQ[key]||0, serial); return marker+'/'+ac+'/'+y+'/'+pad4(serial); }
+  var key=ymd6(dt);
+  if(serial!=null){ NUMSEQ[key]=Math.max(NUMSEQ[key]||0, serial); return marker+'-'+key+'-'+pad4(serial); }
   return issueNo(marker, off, dt); }
 function nextId(t){ return issueNo(t||'L', myOffice(), new Date()); }
 function d(days){ var x=new Date(); x.setDate(x.getDate()-days); return x; }
@@ -662,7 +662,7 @@ function seed(){
   }
   // a confidential Miscellaneous letter — place to Area HQ
   var tm=TOPICS.filter(function(x){return x.dt==='MISCELLANEOUS' && !x.retired;})[0];
-  if(tm){ ITEMS.push({id:issueNoAt('L','PB',new Date(),41),dt:'MISCELLANEOUS',subj:tm.subj,mode:'general',gen:true,conf:true,
+  if(tm){ ITEMS.push({id:issueNoAt('L','PB',new Date(),141),dt:'MISCELLANEOUS',subj:tm.subj,mode:'general',gen:true,conf:true,
       raiser:'place',to:'area',chain:['place','area'],step:1,
       body:'<p>A matter concerning a sewadar is placed before you directly, for your guidance.</p>',
       atts:[],raisedAt:d(1),status:'With Area HQ',badge:'ba',

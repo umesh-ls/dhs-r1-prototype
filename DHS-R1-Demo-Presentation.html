@@ -156,13 +156,15 @@ function nav(active){
 }
 var ACTICO={
  reply:'<svg viewBox="0 0 24 24"><path d="M9 17l-5-5 5-5"/><path d="M4 12h11a5 5 0 0 1 5 5v1"/></svg>',
+ forward:'<svg viewBox="0 0 24 24"><path d="M15 17l5-5-5-5"/><path d="M20 12H9a5 5 0 0 0-5 5v1"/></svg>',
  approve:'<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
  putup:'<svg viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>',
- snooze:'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="M22 6l-3-3"/></svg>',
+ remind:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+ track:'<svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>',
  unread:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>'
 };
 function dact(k){ return '<span class="dact'+(k==='approve'?' ok':'')+'">'+ACTICO[k]+'</span>'; }
-function actLegend(){ var L=[['reply','Reply / forward'],['approve','Approve'],['putup','Put up'],['snooze','Snooze'],['unread','Mark unread']];
+function actLegend(){ var L=[['reply','Reply'],['forward','Forward'],['approve','Approve'],['putup','Put up'],['remind','Set a reminder'],['unread','Mark unread']];
   return '<div style="display:flex;gap:22px;align-items:center;margin-top:14px;flex-wrap:wrap">'+L.map(function(a){ return '<span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink)">'+dact(a[0])+a[1]+'</span>'; }).join('')+'</div>'; }
 function app(o){ o=o||{};
   return '<div class="app'+(o.dark?' dark':'')+'">'+
@@ -233,12 +235,12 @@ S.push('<div class="slide"><div class="kicker">Walkthrough · Administration</di
 S.push('<div class="slide"><div class="kicker">The engine</div><h2 style="margin-top:8px">One routing engine, read from the topic</h2>'+
   '<div class="two wide">'+
   '<div><ul class="pts">'+
-    '<li><b>Office chain.</b> <span>A dak travels its own reporting line — this place → its area → its state → its zone → SCI.</span></li>'+
-    '<li><b>Value decides the approver.</b> <span>On SCI-15, the amount picks the terminal — Area / State / Zone / SCI.</span></li>'+
+    '<li><b>Office chain.</b> <span>A dak travels its own reporting line — this Satsang Place → its Area → its State → its Zone → SCI.</span></li>'+
+    '<li><b>Value decides the approver.</b> <span>On SCI-15, the nature and amount pick the terminal — State / Zone / SCI. Nothing is approved at Satsang Place or Area.</span></li>'+
     '<li><b>Mode-based closure.</b> <span>Approval returns to the raiser; Information notes-and-closes at the top.</span></li>'+
     '<li><b>Verified at approval.</b> <span>A one-time code (OTP) to the authority\'s registered email or mobile — not merely a prior sign-in.</span></li>'+
   '</ul></div>'+
-  '<div><div class="callout"><b>Example — SCI-15 offer of items</b><div style="margin-top:12px" class="flow"><span class="node g" style="font-size:12px;padding:7px 11px">Place</span><span class="ar">→</span><span class="node g" style="font-size:12px;padding:7px 11px">Area</span><span class="ar">→</span><span class="node" style="font-size:12px;padding:7px 11px">State decides</span></div><div style="margin-top:14px;font-size:13.5px;color:var(--ink2)">₹60,000 → decided by the <b>State Secretary</b>. Change the value and the terminal moves with it — automatically.</div></div></div>'+
+  '<div><div class="callout"><b>Example — SCI-15 offer of items</b><div style="margin-top:12px" class="flow"><span class="node g" style="font-size:12px;padding:7px 11px">Satsang Place</span><span class="ar">→</span><span class="node g" style="font-size:12px;padding:7px 11px">Area HQ</span><span class="ar">→</span><span class="node" style="font-size:12px;padding:7px 11px">State decides</span></div><div style="margin-top:14px;font-size:13.5px;color:var(--ink2)">A capital offer of ₹20,000 → decided by the <b>State Office</b>. At ₹40,000 it moves to the <b>Zonal Office</b>; beyond ₹50,000, to <b>SCI</b>. Revenue items are stricter — ₹10,000 and ₹25,000. The terminal moves with the value, automatically.</div></div></div>'+
   '</div><div class="foot"><span class="b">DHS · R1</span><span>05 · Engine</span></div></div>');
 
 /* 5b where the day goes */
@@ -275,46 +277,57 @@ S.push('<div class="slide"><div class="kicker">Walkthrough · Compose</div><h2 s
     '<div class="pt">New Dak</div><div class="ps">Pick what it is about — the system settles the path, the form and who decides</div>'+
     '<div class="grid2" style="margin-bottom:9px"><div class="fld"><div class="l">Document Type</div><div class="v" style="border:1px solid var(--bd2);border-radius:7px;padding:7px 9px">Accounts ▾</div></div><div class="fld"><div class="l">Subject</div><div class="v" style="border:1px solid var(--bd2);border-radius:7px;padding:7px 9px">Change in signatories of bank account ▾</div></div></div>'+
     '<div class="card"><div style="font-size:10px;color:var(--mut);margin-bottom:6px">Approval · decided by <b>SCI Office</b> · form <b>SCI-15</b></div>'+
-    '<div class="flow" style="gap:6px"><span class="bd bgy">Place</span><span style="color:var(--maroon)">→</span><span class="bd bgy">Area</span><span style="color:var(--maroon)">→</span><span class="bd bgy">State</span><span style="color:var(--maroon)">→</span><span class="bd bgy">Zone</span><span style="color:var(--maroon)">→</span><span class="bd ba">SCI decides</span></div>'+
+    '<div class="flow" style="gap:6px"><span class="bd bgy">Satsang Place</span><span style="color:var(--maroon)">→</span><span class="bd bgy">Area</span><span style="color:var(--maroon)">→</span><span class="bd bgy">State</span><span style="color:var(--maroon)">→</span><span class="bd bgy">Zone</span><span style="color:var(--maroon)">→</span><span class="bd ba">SCI decides</span></div>'+
     '<div style="font-size:8.5px;color:var(--mut2);margin-top:7px">Then handed to: Accounts Dept, Beas (email) — the external hand-off, made explicit.</div></div>'+
     '<div class="card" style="margin:0"><h4>Covering note</h4><div style="font-size:9.5px;color:var(--mut2)">This matter is placed before you for consideration and such orders as may be thought fit…</div></div>'})+'</div>'+
   '<div class="foot"><span class="b">DHS · R1</span><span>07 · New Dak</span></div></div>');
 
 /* 8 dak listing */
-function drow(from,subj,form,status,sb,age,acts,unread){
-  return '<div class="row" style="grid-template-columns:96px 1fr 130px 150px;padding:11px 6px"><span style="color:var(--mut)">'+from+'</span>'+
+function drow(sno,no,place,area,dt,subj,form,status,sb,acts,unread){
+  return '<div class="row" style="grid-template-columns:22px 26px 104px 92px 62px 86px 1fr 104px 118px;gap:7px;padding:10px 6px"'+(unread?' ':'')+'>'+
+    '<span style="width:13px;height:13px;border-radius:4px;border:1.4px solid var(--bd2)"></span>'+
+    '<span style="color:var(--mut2);font-size:10px;text-align:right">'+sno+'</span>'+
+    '<span style="font-family:ui-monospace,Menlo,monospace;font-size:9px;color:var(--mut)">'+no+'</span>'+
+    '<span style="font-size:10.5px;color:var(--txt)">'+place+'</span>'+
+    '<span style="font-size:10.5px;color:var(--mut)">'+area+'</span>'+
+    '<span style="font-size:10.5px;color:var(--mut)">'+dt+'</span>'+
     '<span class="s" style="font-size:12px'+(unread?';font-weight:800':'')+'">'+subj+(form?' <span class="bd bp">'+form+'</span>':'')+'</span>'+
     '<span><span class="bd '+sb+'">'+status+'</span></span>'+
-    '<span style="text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:5px"><span style="color:var(--mut2);margin-right:4px">'+age+'</span>'+acts.map(dact).join('')+'</span></div>';
+    '<span style="text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:4px">'+acts.map(dact).join('')+'</span></div>';
+}
+function dhead(){
+  return '<div class="row" style="grid-template-columns:22px 26px 104px 92px 62px 86px 1fr 104px 118px;gap:7px;padding:7px 6px;background:#faf8f6;font-size:8px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700">'+
+    '<span></span><span style="text-align:right">S.No</span><span>Dak No.</span><span>Satsang Place</span><span>Area</span><span>Doc Type</span><span>Subject</span><span>Status</span><span></span></div>';
 }
 S.push('<div class="slide"><div class="kicker">Daily core · Dak Listing</div><h2 style="margin-top:6px">Dak Listing — the inbox members live in</h2>'+
-  '<div style="height:418px;margin-top:6px">'+app({active:'dak',main:
-    '<div class="pt">Dak Listing</div><div class="ps">Inbox and Sent · search and filter as the list grows · act on any row without opening it</div>'+
-    '<div class="tabs"><span class="tab on">Inbox</span><span class="tab">Sent</span><span class="tab">Put up by me</span><span class="tab">Awaiting me</span><span class="tab">Snoozed</span><span class="tab">Closed</span></div>'+
-    '<div style="display:flex;gap:8px;margin-bottom:10px"><span style="flex:1;border:1px solid var(--bd2);border-radius:8px;padding:9px 11px;font-size:11.5px;color:var(--mut2)">Search subject, Dak ID or sender…</span><span style="border:1px solid var(--bd2);border-radius:8px;padding:9px 11px;font-size:11.5px;color:var(--txt)">All departments ▾</span><span class="btnp" style="font-size:12px;padding:8px 14px">+ New Dak ▾</span></div>'+
-    '<div class="card" style="padding:0">'+
-    drow('Ludhiana-I','Solar panels for Satsang Ghar','SCI-15','With Zonal Office','ba','10d',['approve','snooze','unread'],true)+
-    drow('AHQ Ludhiana','Extension of langar hall','','Recommending','ba','11d',['reply','snooze','unread'])+
-    drow('Ludhiana-I','Committee re-constitution','SCI-52','Under decision','bb','14d',['putup','snooze','unread'])+
-    drow('Ludhiana-III','Requisition of stationery','','With Area HQ','ba','2d',['approve','snooze','unread'],true)+
-    drow('Municipal Corp.','Legal notice received','Physical','Received','bb','3d',['reply','snooze','unread'])+
-    drow('State Office','Decision — water cooler','SCI-15','Approved','bg','1d',['reply','unread'])+
-    '<div class="row" style="grid-template-columns:96px 1fr 130px 150px;padding:11px 6px;border:0"><span style="color:var(--mut)">Ludhiana-I</span><span class="s" style="font-size:12px">Vehicle insurance renewal</span><span><span class="bd bgy">Closed · noted</span></span><span style="text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:5px"><span style="color:var(--mut2);margin-right:4px">22d</span>'+dact('unread')+'</span></div></div>'})+'</div>'+
+  '<div style="height:430px;margin-top:6px">'+app({active:'dak',main:
+    '<div class="pt">Dak Listing</div><div class="ps">The columns the offices asked for · search and filter as the list grows · act on any row without opening it</div>'+
+    '<div class="tabs"><span class="tab on">Inbox</span><span class="tab">Sent</span><span class="tab">Put up by me</span><span class="tab">Awaiting me</span><span class="tab">Held back</span><span class="tab">Closed</span><span class="tab">All</span></div>'+
+    '<div style="display:flex;gap:8px;margin-bottom:9px"><span style="flex:1;border:1px solid var(--bd2);border-radius:8px;padding:8px 11px;font-size:11.5px;color:var(--mut2)">Search subject or Dak No…</span><span style="border:1px solid var(--bd2);border-radius:8px;padding:8px 11px;font-size:11.5px;color:var(--txt)">All departments &#9662;</span><span class="btnp" style="font-size:12px;padding:8px 14px">+ New Dak</span></div>'+
+    '<div class="card" style="padding:0">'+dhead()+
+    drow(1,'F15-260823-0138','Ludhiana-I (C)','Ludhiana','Sci 15','Almirahh for the langar hall','SCI-15','With State Office','ba',['reply','forward','remind','unread'],true)+
+    drow(2,'L-260823-0140','Ludhiana-I (C)','Ludhiana','Constr.','Repair of boundary wall','','With State Office','ba',['approve','remind','unread'])+
+    drow(3,'F52-260823-0148','Ludhiana-I (C)','Ludhiana','Satsang','Committee re-constitution','SCI-52','With SCI Office','bb',['reply','forward','remind','unread'],true)+
+    drow(4,'L-260823-0143','Ludhiana-III (C)','Ludhiana','Stock','Requisition of stationery','','With Area HQ','ba',['approve','remind','unread'])+
+    drow(5,'L-260823-0151','Jalandhar-I (MC)','Jalandhar','Accounts','Change in signatories','','Copy &middot; for information','bb',['unread'])+
+    drow(6,'L-260823-0129','Chaunta (SC)','Ludhiana','Accounts','Sale proceeds of trees','','Approved','bg',['unread'])+
+    '</div>'})+'</div>'+
   actLegend()+
+  '<div style="font-size:12.5px;color:var(--ink2);margin-top:9px">Every listing in the system carries the same columns &mdash; <b>S.No, Dak No., Satsang Place with its type, Area, Document Type, Subject and Status</b> &mdash; so a row reads the same wherever it appears.</div>'+
   '<div class="foot"><span class="b">DHS · R1</span><span>08 · Dak Listing</span></div></div>');
 
 /* 8b dak listing — bulk actions */
 S.push('<div class="slide"><div class="kicker">Daily core · Dak Listing</div><h2 style="margin-top:6px">Select several — act together</h2>'+
   '<div style="height:500px;margin-top:8px">'+app({active:'dak',user:'Dr. Lekhi Ji',role:'State Secretary',main:
-    '<div class="pt">Dak Listing · Awaiting me</div><div class="ps">Tick several and approve on one verification, or snooze a batch to a chosen day</div>'+
+    '<div class="pt">Dak Listing · Awaiting me</div><div class="ps">Tick several and approve on one verification, or set a reminder on a batch</div>'+
     '<div style="display:flex;align-items:center;gap:12px;margin-bottom:11px;background:#fcf8f8;border:1px solid #ecd7d7;border-radius:9px;padding:10px 14px"><span style="font-size:13px;color:var(--maroon);font-weight:800">3 selected</span>'+
       '<span class="btnp" style="font-size:12px;padding:8px 14px">Approve — one verification</span>'+
-      '<span class="btns" style="font-size:12px;padding:8px 12px">Snooze…</span><span class="btns" style="font-size:12px;padding:8px 12px">Mark unread</span></div>'+
+      '<span class="btns" style="font-size:12px;padding:8px 12px">Set reminder…</span><span class="btns" style="font-size:12px;padding:8px 12px">Mark unread</span></div>'+
     '<div class="card" style="padding:0">'+
-    '<div class="row" style="grid-template-columns:26px 1fr 120px 120px;padding:11px 6px"><span class="mchk" style="float:none">✓</span><span class="s" style="font-size:12px">Water cooler — langar hall <span class="bd bp">SCI-15</span></span><span><span class="bd ba">to approve</span></span><span style="text-align:right;display:flex;gap:5px;justify-content:flex-end">'+dact('approve')+dact('snooze')+'</span></div>'+
-    '<div class="row" style="grid-template-columns:26px 1fr 120px 120px;padding:11px 6px"><span class="mchk" style="float:none">✓</span><span class="s" style="font-size:12px">Repair of boundary wall</span><span><span class="bd ba">to approve</span></span><span style="text-align:right;display:flex;gap:5px;justify-content:flex-end">'+dact('approve')+dact('snooze')+'</span></div>'+
-    '<div class="row" style="grid-template-columns:26px 1fr 120px 120px;padding:11px 6px"><span class="mchk" style="float:none">✓</span><span class="s" style="font-size:12px">Requisition of stationery</span><span><span class="bd ba">to approve</span></span><span style="text-align:right;display:flex;gap:5px;justify-content:flex-end">'+dact('approve')+dact('snooze')+'</span></div>'+
-    '<div class="row" style="grid-template-columns:26px 1fr 120px 120px;padding:11px 6px;border:0"><span style="width:16px;height:16px;border-radius:4px;border:1.5px solid var(--bd2)"></span><span class="s" style="font-size:12px">Vehicle insurance renewal</span><span><span class="bd ba">to approve</span></span><span style="text-align:right;display:flex;gap:5px;justify-content:flex-end">'+dact('approve')+dact('snooze')+'</span></div></div>'+
+    '<div class="row" style="grid-template-columns:26px 1fr 120px 120px;padding:11px 6px"><span class="mchk" style="float:none">✓</span><span class="s" style="font-size:12px">Water cooler — langar hall <span class="bd bp">SCI-15</span></span><span><span class="bd ba">to approve</span></span><span style="text-align:right;display:flex;gap:5px;justify-content:flex-end">'+dact('approve')+dact('remind')+'</span></div>'+
+    '<div class="row" style="grid-template-columns:26px 1fr 120px 120px;padding:11px 6px"><span class="mchk" style="float:none">✓</span><span class="s" style="font-size:12px">Repair of boundary wall</span><span><span class="bd ba">to approve</span></span><span style="text-align:right;display:flex;gap:5px;justify-content:flex-end">'+dact('approve')+dact('remind')+'</span></div>'+
+    '<div class="row" style="grid-template-columns:26px 1fr 120px 120px;padding:11px 6px"><span class="mchk" style="float:none">✓</span><span class="s" style="font-size:12px">Requisition of stationery</span><span><span class="bd ba">to approve</span></span><span style="text-align:right;display:flex;gap:5px;justify-content:flex-end">'+dact('approve')+dact('remind')+'</span></div>'+
+    '<div class="row" style="grid-template-columns:26px 1fr 120px 120px;padding:11px 6px;border:0"><span style="width:16px;height:16px;border-radius:4px;border:1.5px solid var(--bd2)"></span><span class="s" style="font-size:12px">Vehicle insurance renewal</span><span><span class="bd ba">to approve</span></span><span style="text-align:right;display:flex;gap:5px;justify-content:flex-end">'+dact('approve')+dact('remind')+'</span></div></div>'+
     '<div style="margin-top:11px;background:#fcf8f8;border:1px solid var(--bd2);border-radius:9px;padding:11px 14px"><div style="font-size:11.5px;font-weight:700;color:var(--dark)">Verification — one-time code (OTP)</div><div style="font-size:10.5px;color:var(--mut);margin-top:3px">A one-time code has been sent to your registered <b>email or mobile</b>. One verification covers all three.</div></div>'})+'</div>'+
   '<div class="foot"><span class="b">DHS · R1</span><span>Bulk actions</span></div></div>');
 
@@ -331,10 +344,10 @@ S.push('<div class="slide"><div class="kicker">Daily core · Dak Listing</div><h
       '<div style="padding:8px 9px"><div style="font-size:9.5px;color:var(--dark)">Water cooler — langar hall <span class="bd bg">Raised</span></div><div style="font-size:8px;color:var(--mut2)">approved</div></div></div>'+
     '<div style="flex:1;border:1px solid var(--bd2);border-radius:9px;padding:11px">'+
       '<div style="font-size:13px;font-weight:800;color:var(--dark)">Solar panels for the Satsang Ghar</div>'+
-      '<div style="font-size:8.5px;color:var(--mut2);font-family:monospace;margin:2px 0 8px">SCI15-260901 · With Zonal Office</div>'+
+      '<div style="font-size:8.5px;color:var(--mut2);font-family:monospace;margin:2px 0 8px">F15-260823-0152 &middot; With Zonal Office</div>'+
       '<div style="font-size:9.5px;color:var(--txt);line-height:1.6">This proposal for a 25 kW solar installation is placed for sanction. The estimated value is ₹8,50,000; the enclosure SCI-15 carries the particulars…</div>'+
-      '<div style="margin-top:9px"><span class="bd bp">Enclosure · SCI-15/2026/018</span></div>'+
-      '<div style="margin-top:9px;font-size:8px;color:var(--mut);border-top:1px solid var(--bd);padding-top:7px">Trail: Raised at the Place → Recommended by the Area → Recommended by the State → With the Zonal Office</div></div>'+
+      '<div style="margin-top:9px"><span class="bd bp">Enclosure &middot; F15-260823-0152</span></div>'+
+      '<div style="margin-top:9px;font-size:8px;color:var(--mut);border-top:1px solid var(--bd);padding-top:7px">Trail: Raised at the Satsang Place → Recommended by the Area → Recommended by the State → With the Zonal Office</div></div>'+
     '</div>'})+'</div>'+
   '<div class="foot"><span class="b">DHS · R1</span><span>Reading pane</span></div></div>');
 
@@ -373,29 +386,50 @@ S.push('<div class="slide"><div class="kicker">Daily core · New Dak</div><h2 st
     '<div style="margin-top:9px"><span class="btnp">Submit — send up for recommendation</span> <span class="btns">Cancel</span></div></div>'})+'</div>'+
   '</div><div class="foot"><span class="b">DHS · R1</span><span>Compose</span></div></div>');
 
-/* 9c physical dak */
-S.push('<div class="slide"><div class="kicker">Daily core · New Dak</div><h2 style="margin-top:6px">Register incoming physical dak</h2>'+
+/* 9c reply, forward and copies */
+S.push('<div class="slide"><div class="kicker">Daily core · Dak Listing</div><h2 style="margin-top:6px">Reply and forward — with copies</h2>'+
   '<div class="two" style="margin-top:4px">'+
   '<ul class="pts" style="margin-top:0">'+
-    '<li><b>Paper enters the same system.</b> <span>A letter received from a bank, a government office or a person is recorded as incoming dak.</span></li>'+
-    '<li><b>The scan is mandatory.</b> <span>Nothing is recorded without it — the paper and the record stay together.</span></li>'+
-    '<li><b>Then it flows like any dak.</b> <span>Marked within the office, forwarded onward if needed, tracked to closure.</span></li>'+
+    '<li><b>Write back, or hand it on.</b> <span>An office that finds a discrepancy replies to whoever sent it; an office that is satisfied forwards it onward. Both carry a message.</span></li>'+
+    '<li><b>The dak\'s own route decides who may receive it.</b> <span>Back to an office it has already passed, or onward to the next one. A direction the route does not allow is not offered at all.</span></li>'+
+    '<li><b>Copies inform; they do not move the dak.</b> <span>A peer may be marked a copy &mdash; they can read it and the whole exchange, but cannot act, and it never enters their pending list.</span></li>'+
+    '<li><b>The exchange stays with the dak.</b> <span>To and fro, in one thread, each message named to its office and its writer.</span></li>'+
   '</ul>'+
-  '<div style="height:420px">'+app({active:'dak',main:
-    '<div class="pt">Register — Incoming (Physical) Dak</div><div class="ps">Paper received is recorded with a mandatory scan</div>'+
-    '<div class="card"><div class="grid2"><div class="fld"><div class="l">Received from</div><div class="v">Municipal Corporation, Ludhiana</div></div><div class="fld"><div class="l">Date received</div><div class="v">3 Sep 2026</div></div></div>'+
-    '<div class="grid2" style="margin-top:8px"><div class="fld"><div class="l">Document Type</div><div class="v">Legal</div></div><div class="fld"><div class="l">Subject</div><div class="v">Notice on boundary</div></div></div>'+
-    '<div style="margin-top:9px"><div class="l" style="font-size:6.5px;text-transform:uppercase;color:var(--mut);font-weight:700">Upload the scan — mandatory</div>'+
-    '<div style="display:flex;gap:8px;align-items:center;margin-top:5px"><span class="btns">Choose file</span><span style="font-size:9px;color:#166534">mc-notice.pdf · attached ✓</span></div>'+
-    '<div style="font-size:7.5px;color:var(--mut2);margin-top:4px">PDF or JPG · not more than 5 MB · compressed on receipt</div></div></div>'+
-    '<span class="btnp">Record it</span>'})+'</div>'+
-  '</div><div class="foot"><span class="b">DHS · R1</span><span>Physical dak</span></div></div>');
+  '<div style="height:430px">'+app({active:'dak',user:'Sh. Gulshan Dua',role:'Area Secretary',main:
+    '<div class="pt" style="font-size:15px">F15-260823-0138 · Almirahh for the langar hall</div>'+
+    '<div style="display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--bd);padding-bottom:7px;margin-bottom:10px">'+
+      '<span style="flex:1;font-size:9.5px;color:var(--mut)"><b style="color:var(--dark)">Action by 18 Sep</b> &middot; reminder 12 Sep</span>'+
+      '<span class="dact" style="border-color:var(--maroon);color:var(--maroon)">'+ACTICO.reply+'</span>'+
+      '<span class="dact" style="border-color:var(--maroon);color:var(--maroon)">'+ACTICO.forward+'</span>'+
+      '<span class="dact" style="border-color:var(--maroon);color:var(--maroon)">'+ACTICO.remind+'</span>'+
+      '<span class="btnp" style="font-size:10px;padding:6px 12px">Recommend &amp; forward</span></div>'+
+    '<div style="background:#faf8f6;border:1px solid var(--bd2);border-radius:9px;padding:11px">'+
+      '<div style="display:inline-flex;border:1px solid var(--bd2);border-radius:7px;overflow:hidden;margin-bottom:9px">'+
+        '<span style="background:var(--maroon);color:#fff;font-size:9.5px;padding:5px 12px;font-weight:700">Reply</span>'+
+        '<span style="font-size:9.5px;padding:5px 12px;color:var(--txt)">Forward</span></div>'+
+      '<div class="grid2" style="gap:12px">'+
+        '<div><div style="font-size:6.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700">To</div>'+
+          '<div style="border:1px solid var(--bd2);border-radius:7px;background:#fff;padding:6px 9px;font-size:10px;margin-top:3px">Ludhiana-I &#9662;</div>'+
+          '<div style="font-size:8px;color:var(--maroon);margin-top:4px">goes back to SP Ludhiana-I &mdash; it leaves your desk and returns to theirs</div></div>'+
+        '<div><div style="font-size:6.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700">Copy to <span style="font-weight:400;text-transform:none;letter-spacing:0">(read only)</span></div>'+
+          '<div style="display:flex;gap:5px;margin-top:4px;flex-wrap:wrap">'+
+            '<span style="border:1px solid var(--maroon);background:var(--pink);color:var(--maroon);border-radius:999px;font-size:8.5px;padding:3px 9px;font-weight:700">AHQ Jalandhar</span>'+
+            '<span style="border:1px solid var(--bd2);border-radius:999px;font-size:8.5px;padding:3px 9px;color:var(--mut)">SSO Punjab</span></div>'+
+          '<div style="font-size:8px;color:var(--mut2);margin-top:4px">Only offices this dak\'s route permits are offered.</div></div>'+
+      '</div>'+
+      '<div style="border:1px solid var(--bd2);border-radius:7px;background:#fff;margin-top:9px;overflow:hidden">'+
+        '<div style="background:#faf8f6;border-bottom:1px solid var(--bd);padding:4px 7px;display:flex;gap:4px">'+
+          ['<b>B</b>','<i>I</i>','<u>U</u>','&bull;','1.'].map(function(x){return '<span style="border:1px solid var(--bd2);border-radius:4px;background:#fff;font-size:8px;padding:2px 6px;color:var(--txt)">'+x+'</span>';}).join('')+'</div>'+
+        '<div style="padding:8px 10px;font-size:10px;color:var(--dark);min-height:44px">The enclosure is unsigned &mdash; kindly have it signed by the Incharge and re-send.</div></div>'+
+      '<div style="display:flex;gap:7px;align-items:center;margin-top:8px"><span class="btnp" style="font-size:10px;padding:6px 14px">Send</span><span class="btns" style="font-size:10px;padding:6px 12px">Cancel</span><span style="font-size:8px;color:var(--mut2)">Kept with the dak, to and fro. Copies to: AHQ Jalandhar.</span></div>'+
+    '</div>'})+'</div>'+
+  '</div><div class="foot"><span class="b">DHS · R1</span><span>Reply · forward · copies</span></div></div>');
 
 /* 10 approvals — one verification */
 S.push('<div class="slide"><div class="kicker">Walkthrough · Decide</div><h2 style="margin-top:6px">Approve many on one verification</h2>'+
   '<div style="height:470px;margin-top:10px">'+app({active:'dak',user:'Dr. Lekhi Ji',role:'State Secretary',main:
     '<div class="pt">Awaiting me</div><div class="ps">Select several · one one-time code covers them all</div>'+
-    '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:10px;color:var(--maroon);font-weight:700">3 selected</span><span class="btnp">Approve — one verification</span><span class="btns">Snooze</span></div>'+
+    '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:10px;color:var(--maroon);font-weight:700">3 selected</span><span class="btnp">Approve — one verification</span><span class="btns">Set reminder</span></div>'+
     '<div class="card" style="padding:0">'+
     '<div class="row" style="grid-template-columns:20px 1fr 90px 60px"><span class="mchk" style="float:none">✓</span><span class="s">Water cooler — langar hall <span class="bd bp">SCI-15</span></span><span class="bd ba">to approve</span><span style="text-align:right;color:var(--mut2)">6d</span></div>'+
     '<div class="row" style="grid-template-columns:20px 1fr 90px 60px"><span class="mchk" style="float:none">✓</span><span class="s">Repair of boundary wall</span><span class="bd ba">to approve</span><span style="text-align:right;color:var(--mut2)">8d</span></div>'+
@@ -458,11 +492,11 @@ S.push('<div class="slide"><div class="kicker">Walkthrough · SCI Forms</div><h2
     '<div class="pt">SCI Forms</div><div class="ps">Every form filled, kept for reference · draft → submitted → forwarded</div>'+
     '<div class="tabs"><span class="tab on">All</span><span class="tab">Draft</span><span class="tab">Submitted</span><span class="tab">Forwarded</span><span style="margin-left:auto" class="btnp">+ New form ▾</span></div>'+
     '<div class="card" style="padding:0">'+
-    '<div class="row" style="grid-template-columns:120px 55px 85px 1fr 55px"><span style="font-family:monospace;font-size:8.5px;color:var(--mut)">SCI-15/2026/011</span><span>SCI-15</span><span class="bd ba">submitted</span><span class="s">Ceiling fans — langar hall</span><span style="text-align:right" class="btns">View</span></div>'+
-    '<div class="row" style="grid-template-columns:120px 55px 85px 1fr 55px"><span style="font-family:monospace;font-size:8.5px;color:var(--mut)">SCI-52/2026/006</span><span>SCI-52</span><span class="bd bb">forwarded</span><span class="s">Committee re-constitution</span><span style="text-align:right" class="btns">View</span></div>'+
-    '<div class="row" style="grid-template-columns:120px 55px 85px 1fr 55px"><span style="font-family:monospace;font-size:8.5px;color:var(--mut)">SCI-02/2026/031</span><span>SCI-02</span><span class="bd ba">submitted</span><span class="s">Sh. Mahesh Kumar — bio-data</span><span style="text-align:right" class="btns">View</span></div>'+
-    '<div class="row" style="grid-template-columns:120px 55px 85px 1fr 55px;border:0"><span style="font-family:monospace;font-size:8.5px;color:var(--mut)">SCI-56/2026/002</span><span>SCI-56</span><span class="bd bg">draft</span><span class="s">Sh. S. Singh — Satsang Karta</span><span style="text-align:right" class="btns">Edit</span></div></div>'+
-    '<div style="font-size:9.5px;color:var(--mut2)">Each form carries its own ID + frozen version, and is enclosed on the letter by reference.</div>'})+'</div>'+
+    '<div class="row" style="grid-template-columns:120px 55px 85px 1fr 55px"><span style="font-family:monospace;font-size:8.5px;color:var(--mut)">F15-260823-0111</span><span>SCI-15</span><span class="bd ba">submitted</span><span class="s">Ceiling fans — langar hall</span><span style="text-align:right" class="btns">View</span></div>'+
+    '<div class="row" style="grid-template-columns:120px 55px 85px 1fr 55px"><span style="font-family:monospace;font-size:8.5px;color:var(--mut)">F52-260823-0106</span><span>SCI-52</span><span class="bd bb">forwarded</span><span class="s">Committee re-constitution</span><span style="text-align:right" class="btns">View</span></div>'+
+    '<div class="row" style="grid-template-columns:120px 55px 85px 1fr 55px"><span style="font-family:monospace;font-size:8.5px;color:var(--mut)">F02-260823-0121</span><span>SCI-02</span><span class="bd ba">submitted</span><span class="s">Sh. Mahesh Kumar — bio-data</span><span style="text-align:right" class="btns">View</span></div>'+
+    '<div class="row" style="grid-template-columns:120px 55px 85px 1fr 55px;border:0"><span style="font-family:monospace;font-size:8.5px;color:var(--mut)">F56-260823-0102</span><span>SCI-56</span><span class="bd bg">draft</span><span class="s">Sh. S. Singh — Satsang Karta</span><span style="text-align:right" class="btns">Edit</span></div></div>'+
+    '<div style="font-size:9.5px;color:var(--mut2)">A form is numbered on the same register as everything else. When it is attached, <b>the dak takes that number</b> &mdash; one item, one number.</div>'})+'</div>'+
   '<div class="pdfnote" style="margin-top:12px"><span class="pdfbadge">PDF</span> Forms follow the <b>official SCI format</b> and are <b>available as PDF downloads</b> for print and record.</div>'+
   '<div class="foot"><span class="b">DHS · R1</span><span>13 · SCI Form space</span></div></div>');
 
@@ -496,8 +530,8 @@ S.push('<div class="slide"><div class="kicker">Daily core · SCI forms</div><h2 
 S.push('<div class="slide"><div class="kicker">Daily core · SCI forms</div><h2 style="margin-top:6px">SCI-52 with committee & SCI-02</h2>'+
   '<div style="display:grid;grid-template-columns:0.58fr 1fr;gap:28px;align-items:start;flex:1;margin-top:8px">'+
   '<div><ul class="pts" style="margin-top:0">'+
-    '<li><b>Committee pre-populated</b> <span>from the place record — name, designation, DOB / age, D.O.I.</span></li>'+
-    '<li><b>Action dropdowns</b> <span>per member; the recommended sewa is offered by the place type.</span></li>'+
+    '<li><b>Committee pre-populated</b> <span>from the Satsang Place record — name, designation, DOB / age, D.O.I.</span></li>'+
+    '<li><b>Action dropdowns</b> <span>per member; the recommended sewa is offered by the type of Satsang Place.</span></li>'+
     '<li><b>SCI-02 rides along</b> <span>for each addition — fill fresh, or select one already on record.</span></li>'+
   '</ul>'+
   '<div class="pdfnote"><span class="pdfbadge">PDF</span> Produced in the <b>official SCI format</b>, downloadable as a <b>PDF</b>.</div></div>'+
@@ -525,7 +559,7 @@ S.push('<div class="slide"><div class="kicker">Daily core · SCI forms</div><h2 
     '<div style="background:var(--maroon);color:#fff;padding:12px 16px;font-size:14px;font-weight:800">SCI-02 — Bio-data of functionary</div>'+
     '<div style="padding:16px 18px;background:#fff">'+
     '<div style="border-bottom:1px solid var(--bd);padding-bottom:13px;margin-bottom:13px"><div style="font-size:9px;text-transform:uppercase;color:var(--mut);font-weight:700;letter-spacing:.5px">Already on record — select an existing SCI-02</div>'+
-    '<div style="border:1px solid var(--bd2);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--dark);margin-top:6px">Sh. Mahesh Kumar · SCI-02/2026/031 ▾</div>'+
+    '<div style="border:1px solid var(--bd2);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--dark);margin-top:6px">Sh. Mahesh Kumar · F02-260823-0121 ▾</div>'+
     '<div style="font-size:10.5px;color:var(--mut2);margin-top:6px">Particulars shown rather than re-keyed. Choose only if the same person is already on record.</div></div>'+
     '<div class="grid2"><div class="fld"><div class="l">Name</div><div class="v">Sh. Mahesh Kumar</div></div><div class="fld"><div class="l">Father\'s name</div><div class="v">Sh. Sohan Lal</div></div></div>'+
     '<div class="grid2" style="margin-top:12px"><div class="fld"><div class="l">Date of birth</div><div class="v">14 Jun 1974</div></div><div class="fld"><div class="l">Qualification</div><div class="v">B.Com.</div></div></div>'+
@@ -549,7 +583,7 @@ S.push('<div class="slide"><div class="kicker">Walkthrough · Oversight</div><h2
     '<div class="pt">Workflow</div><div class="ps">One engine underneath · Board · Triage · Ageing · Workload · Timeline · Calendar</div>'+
     '<div class="tabs"><span class="tab on">Board</span><span class="tab">Triage</span><span class="tab">Ageing</span><span class="tab">Workload</span><span class="tab">Timeline</span><span class="tab">Calendar</span></div>'+
     '<div class="kanban">'+
-    '<div class="kcol"><div class="h" style="color:#1e40af">On my desk · 2</div><div class="kc"><div class="t">Boundary wall repair</div><div class="m">AHQ · 4d</div></div><div class="kc"><div class="t">Water pump service</div><div class="m">Place · 2d</div></div></div>'+
+    '<div class="kcol"><div class="h" style="color:#1e40af">On my desk · 2</div><div class="kc"><div class="t">Boundary wall repair</div><div class="m">AHQ · 4d</div></div><div class="kc"><div class="t">Water pump service</div><div class="m">Satsang Place · 2d</div></div></div>'+
     '<div class="kcol"><div class="h" style="color:#7a2e46">Sent onward · 2</div><div class="kc"><div class="t">Solar panels</div><div class="m">→ Zone · 10d</div></div><div class="kc"><div class="t">Langar hall</div><div class="m">→ State · 11d</div></div></div>'+
     '<div class="kcol"><div class="h" style="color:#991b1b">Returned · 1</div><div class="kc"><div class="t">Bank signatory</div><div class="m">for correction · 5d</div></div></div>'+
     '<div class="kcol"><div class="h" style="color:#166534">Closed · 2</div><div class="kc"><div class="t">Vehicle insurance</div><div class="m">approved</div></div><div class="kc"><div class="t">Misc account</div><div class="m">not approved</div></div></div>'+
@@ -647,24 +681,191 @@ S.push('<div class="slide"><div class="kicker">Walkthrough · Feel</div><h2 styl
   '</div><div class="foot"><span class="b">DHS · R1</span><span>23 · Light & dark</span></div></div>');
 
 /* 24 coverage */
+/* dak numbering */
+S.push('<div class="slide"><div class="kicker">The record</div><h2 style="margin-top:6px">One number, from the day it is raised</h2>'+
+  '<div style="display:flex;justify-content:center;margin-top:22px">'+
+    '<div style="font-family:ui-monospace,Menlo,monospace;font-size:46px;font-weight:700;color:var(--maroon);letter-spacing:1px">F52<span style="color:var(--bd2)">-</span>260823<span style="color:var(--bd2)">-</span>0147</div>'+
+  '</div>'+
+  '<div class="grid3" style="margin-top:24px">'+
+    '<div class="box"><div class="bt">F52 &mdash; the marker</div><p><b>L</b> a letter &middot; <b>C</b> a circular &middot; <b>F</b> and the form number for an SCI form. A reader can tell at once what they are looking at, and forms can be counted by marker in reports.</p></div>'+
+    '<div class="box"><div class="bt">260823 &mdash; the date</div><p>Written <b>YYMMDD</b> &mdash; reading almost as before, but sorting correctly in every list and report.</p></div>'+
+    '<div class="box"><div class="bt">0147 &mdash; the running number</div><p><b>Unique across India for that date</b>, not counted per office. Counted per office, the same number would exist in several areas on one day and would identify nothing.</p></div>'+
+  '</div>'+
+  '<div style="display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;justify-content:center;font-family:ui-monospace,Menlo,monospace;font-size:15px;color:var(--ink2)">'+
+    ['L-260823-0147 &nbsp;a general correspondence letter','C-260823-0147 &nbsp;a circular','F52-260823-0147 &nbsp;an SCI-52','F02-260823-0147 &nbsp;an SCI-02']
+      .map(function(x){ return '<span style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:7px 12px">'+x+'</span>'; }).join('')+
+  '</div>'+
+  '<div class="callout" style="margin-top:20px">Issued once, at submission, and <b>never changed</b> &mdash; not when the dak moves onward, not when it is returned for correction, not when it is filed. Where a form is numbered before its dak exists, <b>the dak takes that number</b>. One item, one number, and <b>no second inward/outward numbering</b> &mdash; the register is a view drawn from the movement record. The number is never displayed alone: the Satsang Place, area and subject accompany it wherever it appears.</div>'+
+  '<div class="foot"><span class="b">DHS · R1</span><span>Dak numbering</span></div></div>');
+
+/* SCI-15 approval limits */
+S.push('<div class="slide"><div class="kicker">Daily core · SCI forms</div><h2 style="margin-top:6px">The offer\'s nature and value decide who approves</h2>'+
+  '<div class="two" style="margin-top:4px">'+
+  '<ul class="pts" style="margin-top:0">'+
+    '<li><b>Nothing is approved at Satsang Place or Area.</b> <span>Those offices raise and recommend; the decision sits above them.</span></li>'+
+    '<li><b>Each item is capital or revenue.</b> <span>An offer of mixed items is totalled separately for each nature.</span></li>'+
+    '<li><b>The higher requirement governs.</b> <span>Where both natures are present, the dak goes to whichever office the stricter limit demands.</span></li>'+
+    '<li><b>It settles as you type.</b> <span>The approving office on the letter changes the moment a cost is keyed.</span></li>'+
+  '</ul>'+
+  '<div>'+
+    '<div class="sheet big"><div class="sheeth"><div class="no">SCI-15</div><div class="o">Approval limits</div><div class="t">Offer of items in donation</div></div>'+
+    '<div class="sheetb"><table class="ft" style="width:100%">'+
+      '<tr><th>Nature</th><th>Value band</th><th>Decided by</th></tr>'+
+      '<tr><td>Capital</td><td>up to &#8377;25,000</td><td><b>State Office</b></td></tr>'+
+      '<tr><td>Capital</td><td>up to &#8377;50,000</td><td><b>Zonal Office</b></td></tr>'+
+      '<tr><td>Capital</td><td>above that</td><td><b>SCI Office</b></td></tr>'+
+      '<tr><td>Revenue</td><td>up to &#8377;10,000</td><td><b>State Office</b></td></tr>'+
+      '<tr><td>Revenue</td><td>up to &#8377;25,000</td><td><b>Zonal Office</b></td></tr>'+
+      '<tr><td>Revenue</td><td>above that</td><td><b>SCI Office</b></td></tr>'+
+    '</table>'+
+    '<div style="margin-top:12px;font-size:11px;color:var(--maroon);border-top:1px solid var(--bd);padding-top:9px">Capital &#8377;40,000 + revenue &#8377;12,000 &rarr; on these values the offer is decided by the <b>Zonal Office</b></div>'+
+    '</div></div>'+
+  '</div></div>'+
+  '<div class="foot"><span class="b">DHS · R1</span><span>Approval limits</span></div></div>');
+
+/* the limits are editable */
+S.push('<div class="slide"><div class="kicker">Walkthrough · Administration</div><h2 style="margin-top:6px">The limits are settings, not code</h2>'+
+  '<div style="height:450px;margin-top:10px">'+app({active:'top',user:'Sh. Naresh Gupta',role:'DHS Admin',main:
+    '<div class="pt">Edit workflow</div><div class="ps">Changes publish a new version, effective today. Dak already in flight keeps the version it started under.</div>'+
+    '<div class="card">'+
+      '<div class="grid2" style="grid-template-columns:1fr 1fr 1fr;gap:10px"><div class="fld"><div class="l">Who may raise it</div><div class="v">Centre &amp; above</div></div><div class="fld"><div class="l">Mode</div><div class="v">Approval</div></div><div class="fld"><div class="l">Decided by</div><div class="v">by value</div></div></div>'+
+      '<div style="margin-top:11px;display:flex;gap:16px;align-items:center;font-size:10.5px;color:var(--dark)"><span><span style="display:inline-block;width:11px;height:11px;border:1.4px solid var(--maroon);background:var(--maroon);color:#fff;border-radius:3px;font-size:8px;text-align:center;line-height:11px;margin-right:5px">&#10003;</span>value-based (a value decides the level)</span><span style="color:var(--mut2)">confidential allowed</span><span style="color:var(--mut2)">retired</span></div>'+
+      '<div style="margin-top:11px;border:1px solid var(--bd2);border-radius:9px;background:#faf8f6;padding:11px 13px">'+
+        '<div style="font-size:11px;font-weight:800;color:var(--dark)">Approval limits for SCI-15</div>'+
+        '<div style="font-size:8.5px;color:var(--mut);margin:3px 0 8px;line-height:1.5">The value on the form decides which office approves it. Nothing is approved at Satsang Place or Area level. Where an offer carries both natures, the higher requirement governs.</div>'+
+        '<table class="ft" style="width:100%"><tr><th>Nature</th><th>Value band</th><th>Decided by</th></tr>'+
+        '<tr><td>Capital</td><td>up to &#8377; <span style="border:1px solid var(--bd2);border-radius:5px;background:#fff;padding:2px 8px">25000</span></td><td><span style="border:1px solid var(--bd2);border-radius:5px;background:#fff;padding:2px 8px">State Office &#9662;</span></td></tr>'+
+        '<tr><td>Capital</td><td>up to &#8377; <span style="border:1px solid var(--bd2);border-radius:5px;background:#fff;padding:2px 8px">50000</span></td><td><span style="border:1px solid var(--bd2);border-radius:5px;background:#fff;padding:2px 8px">Zonal Office &#9662;</span></td></tr>'+
+        '<tr><td>Revenue</td><td>up to &#8377; <span style="border:1px solid var(--bd2);border-radius:5px;background:#fff;padding:2px 8px">10000</span></td><td><span style="border:1px solid var(--bd2);border-radius:5px;background:#fff;padding:2px 8px">State Office &#9662;</span></td></tr>'+
+        '<tr><td>Revenue</td><td>up to &#8377; <span style="border:1px solid var(--bd2);border-radius:5px;background:#fff;padding:2px 8px">25000</span></td><td><span style="border:1px solid var(--bd2);border-radius:5px;background:#fff;padding:2px 8px">Zonal Office &#9662;</span></td></tr>'+
+        '</table></div>'+
+      '<div style="margin-top:12px"><span class="btnp">Publish new version</span></div>'+
+    '</div>'})+'</div>'+
+  '<div style="font-size:12.5px;color:var(--ink2);margin-top:9px">When Beas revises a limit, the office changes a figure here. Nobody edits the system.</div>'+
+  '<div class="foot"><span class="b">DHS · R1</span><span>Editing the limits</span></div></div>');
+
+/* the official sheet */
+S.push('<div class="slide"><div class="kicker">Daily core · SCI forms</div><h2 style="margin-top:6px">Filled for the screen, printed as the official sheet</h2>'+
+  '<div class="two" style="margin-top:4px">'+
+  '<ul class="pts" style="margin-top:0">'+
+    '<li><b>Two jobs, two layouts.</b> <span>Entry is built for entry &mdash; dropdowns, pickers, pre-population, and it works on a phone. The sheet is built to be exact.</span></li>'+
+    '<li><b>The sheet reproduces the stationery.</b> <span>SCI-15 and SCI-52 landscape, SCI-02 portrait, with the device, the form number, the ruled tables and the signature blocks where they belong.</span></li>'+
+    '<li><b>Side by side, so nothing is filled blind.</b> <span>The sheet redraws as each field is keyed; open it at actual size to read the small print.</span></li>'+
+    '<li><b>Only the sheet is printed.</b> <span>It is what downloads as PDF and what opens from a dak &mdash; so what you check is what Beas receives.</span></li>'+
+  '</ul>'+
+  '<div style="display:flex;flex-direction:column;gap:9px">'+
+    '<div style="display:inline-flex;border:1px solid var(--bd2);border-radius:7px;overflow:hidden;align-self:flex-start">'+
+      '<span style="font-size:10px;padding:6px 13px;color:var(--txt)">Fill the form</span>'+
+      '<span style="background:var(--maroon);color:#fff;font-size:10px;padding:6px 13px;font-weight:700">Side by side</span>'+
+      '<span style="font-size:10px;padding:6px 13px;color:var(--txt)">Official format</span></div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start">'+
+      '<div style="border:1px solid var(--bd2);border-radius:9px;padding:10px;background:#fff">'+
+        '<div style="font-size:8px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700;margin-bottom:6px">Entry</div>'+
+        '<div class="fld" style="margin-bottom:6px"><div class="l">Name of Article</div><div class="v">Water cooler (150 L)</div></div>'+
+        '<div class="grid2" style="gap:6px"><div class="fld"><div class="l">Cost</div><div class="v">60,000</div></div><div class="fld"><div class="l">Nature</div><div class="v">Capital &#9662;</div></div></div>'+
+        '<div class="fld" style="margin-top:6px"><div class="l">Donor</div><div class="v">Sh. Mahesh Kumar</div></div></div>'+
+      '<div style="background:#8a8a8a;border-radius:9px;padding:8px">'+
+        '<div style="background:#fff;padding:7px;font-family:Times,serif;font-size:5.5px;line-height:1.25;color:#000">'+
+          '<div style="display:flex;gap:5px;align-items:flex-start"><div style="width:15px;height:15px;border:1px solid #000;padding:1.5px"><div style="background:#000;color:#fff;font-size:3.4px;text-align:center;padding-top:2px;line-height:1.05;font-weight:700">RS<br>SB</div></div>'+
+            '<div style="flex:1;text-align:center;font-weight:700;font-variant:small-caps;font-size:6.5px">Satsang Centres in India<br>Offer of Items / Material in Donation</div>'+
+            '<div style="font-weight:700;font-size:6px">SCI/2019/15</div></div>'+
+          '<div style="margin-top:5px;font-variant:small-caps">Beas File No.: <span style="border-bottom:1px solid #000;display:inline-block;width:50px"></span></div>'+
+          '<div style="font-variant:small-caps">Name of Satsang Place: <span style="border-bottom:1px solid #000;display:inline-block;width:60px">Ludhiana-I</span> Attached to: <span style="border-bottom:1px solid #000;display:inline-block;width:34px"></span></div>'+
+          '<table style="width:100%;border-collapse:collapse;margin-top:4px;font-size:4.6px">'+
+            '<tr>'+['Sr.','Name of Article','Present Offer','Cost of item','Justification','Existing holding','Donor&rsquo;s Details','Signature'].map(function(h){return '<td style="border:1px solid #000;padding:1px;text-align:center;font-weight:700;font-variant:small-caps">'+h+'</td>';}).join('')+'</tr>'+
+            '<tr><td style="border:1px solid #000;padding:1px;text-align:center">1</td><td style="border:1px solid #000;padding:1px">Water cooler (150 L)</td><td style="border:1px solid #000;padding:1px;text-align:center">1 no.</td><td style="border:1px solid #000;padding:1px;text-align:center">&#8377;60,000</td><td style="border:1px solid #000;padding:1px">For the sangat in summer</td><td style="border:1px solid #000;padding:1px"></td><td style="border:1px solid #000;padding:1px">Sh. Mahesh Kumar</td><td style="border:1px solid #000;padding:1px"></td></tr>'+
+            '<tr>'+Array(8).join('x').split('x').map(function(){return '<td style="border:1px solid #000;padding:1px;height:6px"></td>';}).join('')+'</tr>'+
+          '</table>'+
+          '<div style="text-align:right;margin-top:4px"><span style="border-top:1px solid #000;display:inline-block;padding-top:1px;font-size:4.8px">Incharge/CT/Secretary</span></div>'+
+          '<table style="width:100%;border-collapse:collapse;margin-top:3px;font-size:4.4px"><tr>'+
+            '<td colspan="2" style="border:1px solid #000;text-align:center;font-weight:700;font-variant:small-caps;padding:1px">Recommendations of</td>'+
+            '<td style="border:1px solid #000;text-align:center;font-weight:700;font-variant:small-caps;padding:1px">Approval of Secretary, RSSB</td></tr>'+
+            '<tr><td style="border:1px solid #000;padding:2px;height:18px;vertical-align:top">Area Secretary</td><td style="border:1px solid #000;padding:2px;vertical-align:top">Zonal Secretary</td><td style="border:1px solid #000;padding:2px;vertical-align:top">Secretary, Rssb, Beas</td></tr>'+
+          '</table>'+
+        '</div></div>'+
+    '</div>'+
+    '<div class="pdfnote" style="margin-top:2px"><span class="pdfbadge">PDF</span> The sheet on the right is what <b>prints and downloads</b> &mdash; nothing else can be.</div>'+
+  '</div></div>'+
+  '<div class="foot"><span class="b">DHS · R1</span><span>The official sheet</span></div></div>');
+
+/* reminders */
+S.push('<div class="slide"><div class="kicker">Daily core · Keeping track</div><h2 style="margin-top:6px">How a dak reaches the Calendar</h2>'+
+  '<div class="grid3" style="margin-top:24px">'+
+    '<div class="box"><div class="bt">An action-by date</div><p>Carried on the dak itself, set by the office holding it or by the raiser. It shows on the Calendar of <b>whoever holds it</b>, and counts on the register and in escalation.</p></div>'+
+    '<div class="box"><div class="bt">A reminder you set</div><p>Personal. It comes up on <b>your</b> Calendar on the day you choose, with your note. Nobody else sees it.</p></div>'+
+    '<div class="box"><div class="bt">Held back</div><p>The same reminder, with one tick added: <b>keep it out of my pending list until then</b>. The dak still sits with your office and the clock still runs.</p></div>'+
+  '</div>'+
+  '<div class="callout" style="margin-top:24px"><b>Snooze used to be a separate action, and we removed it.</b> It set a date just as a reminder does, but quietly cleared the item from an officer&rsquo;s list while the office stayed accountable &mdash; a list that looked healthier than the office was. It is now a tick on the reminder, so the hiding is a visible choice rather than a feature of its own.</div>'+
+  '<div style="font-size:12.5px;color:var(--ink2);margin-top:18px">Nothing else places a dak on the Calendar. The month shows action-by dates, overdue ones, and your own reminders in separate marks.</div>'+
+  '<div class="foot"><span class="b">DHS · R1</span><span>Reminders &amp; the Calendar</span></div></div>');
+
+/* users & access */
+S.push('<div class="slide"><div class="kicker">Walkthrough · Administration</div><h2 style="margin-top:6px">Users &amp; access</h2>'+
+  '<div style="height:440px;margin-top:10px">'+app({active:'top',user:'Sh. Naresh Gupta',role:'DHS Admin',main:
+    '<div class="pt">User &amp; Access</div><div class="ps">Who is in which office, in what role, and which departments they belong to</div>'+
+    '<div class="tabs"><span class="tab on">All</span><span class="tab">Legal</span><span class="tab">Engineering</span><span class="tab">Accounting</span><span class="tab">Other</span></div>'+
+    '<div class="card" style="padding:0">'+
+    '<div class="row" style="grid-template-columns:1.3fr 1.3fr 1fr 1fr;padding:8px 6px;background:#faf8f6;font-size:8px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700"><span>Name</span><span>Office</span><span>Role</span><span>Department</span></div>'+
+    [['Sh. Balwinder Kakkar','Ludhiana-I','Signing Authority','&mdash;'],
+     ['Sh. Ramesh Chander','Ludhiana-I','Office Staff','&mdash;'],
+     ['Sh. Gulshan Dua','Area HQ Ludhiana','Signing Authority','&mdash;'],
+     ['Sh. G.L. Lamba','Zonal Office &mdash; Zone-II','Department','Legal'],
+     ['Sh. Nikhil Chhabra','Zonal Office &mdash; Zone-II','Department','Engineering'],
+     ['Sh. Mani Talwar','Zonal Office &mdash; Zone-III','Department','Engineering'],
+     ['Sh. Abhinav Puri','Zonal Office &mdash; Zone-III','Department','Accounting']]
+      .map(function(r){ return '<div class="row" style="grid-template-columns:1.3fr 1.3fr 1fr 1fr;padding:9px 6px;font-size:10.5px"><span style="color:var(--dark);font-weight:600">'+r[0]+'</span><span style="color:var(--mut)">'+r[1]+'</span><span>'+r[2]+'</span><span style="color:'+(r[3]==='&mdash;'?'var(--mut2)':'var(--maroon)')+';font-weight:'+(r[3]==='&mdash;'?'400':'700')+'">'+r[3]+'</span></div>'; }).join('')+
+    '</div>'})+'</div>'+
+  '<div style="font-size:12.5px;color:var(--ink2);margin-top:9px">A department member sees only their own category of dak, on their own office\'s chain. Adding Legal, Engineering or Accounting at the AHQ, the State Office or SCI needs <b>new users, not new code</b> &mdash; and a new department is a line in the registry.</div>'+
+  '<div class="foot"><span class="b">DHS · R1</span><span>Users &amp; access</span></div></div>');
+
+/* mobile */
+S.push('<div class="slide"><div class="kicker">Walkthrough · On the move</div><h2 style="margin-top:6px">The whole system on a phone</h2>'+
+  '<div class="two" style="margin-top:4px">'+
+  '<ul class="pts" style="margin-top:0">'+
+    '<li><b>Not a separate app.</b> <span>The same system, reflowed. Nothing is left out and nothing has to be maintained twice.</span></li>'+
+    '<li><b>The menu folds away.</b> <span>A top bar with the hamburger; the sidebar slides over when called.</span></li>'+
+    '<li><b>Listings become cards.</b> <span>Dak number and status on one line, the subject on its own, place and area beneath &mdash; with the actions always visible, since there is no hover on a phone.</span></li>'+
+    '<li><b>Everything else stacks.</b> <span>Two-pane reading, reports, the compose panel and the registers each drop to one column; wide tables scroll.</span></li>'+
+  '</ul>'+
+  '<div style="display:flex;justify-content:center;align-items:center;height:430px">'+
+    '<div class="phone"><div class="ph" style="display:flex;align-items:center;gap:8px"><span style="border:1px solid rgba(255,255,255,.5);border-radius:4px;padding:1px 5px;font-size:9px">&#9776;</span><span style="letter-spacing:2px">DHS</span></div>'+
+    '<div class="phb">'+
+      '<div style="font-size:10px;font-weight:800;color:var(--dark)">Dak Listing</div>'+
+      '<div style="display:flex;gap:5px;margin:6px 0 8px;overflow:hidden"><span style="background:var(--maroon);color:#fff;border-radius:5px;font-size:7px;padding:3px 7px">Inbox</span><span style="border:1px solid var(--bd2);border-radius:5px;font-size:7px;padding:3px 7px;color:var(--mut)">Sent</span><span style="border:1px solid var(--bd2);border-radius:5px;font-size:7px;padding:3px 7px;color:var(--mut)">Awaiting</span></div>'+
+      [['1','F15-260823-0138','Almirahh for the langar hall','Ludhiana-I (C) · Ludhiana','With State Office'],
+       ['2','L-260823-0140','Repair of boundary wall','Ludhiana-I (C) · Ludhiana','With State Office'],
+       ['3','F52-260823-0148','Committee re-constitution','Ludhiana-I (C) · Ludhiana','With SCI Office']]
+       .map(function(r){ return '<div class="mcard"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:6.5px;color:var(--mut);font-family:monospace">'+r[0]+'. '+r[1]+'</span><span class="bd ba" style="font-size:6px">'+r[4]+'</span></div>'+
+         '<div class="t" style="font-size:8.5px;margin-top:3px">'+r[2]+'</div>'+
+         '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px"><span class="m" style="font-size:6.5px">'+r[3]+'</span>'+
+         '<span style="display:flex;gap:3px">'+['reply','forward','remind'].map(function(k){return '<span style="width:13px;height:13px;border:1px solid var(--maroon);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;color:var(--maroon)"><span style="width:7px;height:7px;display:block">'+ACTICO[k]+'</span></span>';}).join('')+'</span></div></div>'; }).join('')+
+    '</div></div>'+
+  '</div></div>'+
+  '<div class="foot"><span class="b">DHS · R1</span><span>Mobile</span></div></div>');
+
 S.push('<div class="slide"><div class="kicker">Where we are</div><h2 style="margin-top:6px">What R1 demonstrates</h2>'+
   '<div class="cov">'+
-  '<div class="col"><h3 style="color:#3b6d11">Built & working</h3><ul>'+
-    '<li>Topic-driven routing, terminals, thresholds & forms — configurable</li>'+
-    '<li>Roles, departments, all-India offices & office-scoped visibility</li>'+
-    '<li>Dak Listing (inbox/sent/tabs, search, snooze) + New Dak</li>'+
-    '<li>SCI-15 / 52 / 02 / 56 in real format, with edit-lock lifecycle</li>'+
-    '<li>One-verification approvals — desktop & mobile</li>'+
-    '<li>Workflow board + Triage / Ageing / Workload / Timeline</li>'+
-    '<li>Registers, Dashboard, Report catalogue, light & dark</li>'+
+  '<div class="col"><h3 style="color:#3b6d11">Built &amp; working</h3><ul>'+
+    '<li>Topic-driven routing, terminals, mandatory forms — all configurable</li>'+
+    '<li>Approval limits by nature and value, editable as settings</li>'+
+    '<li>Roles, departments, all-India offices, office-scoped visibility</li>'+
+    '<li>Dak Listing with the agreed columns, search, filters, reminders</li>'+
+    '<li>Reply &amp; forward with copies, bounded by the dak\'s own route</li>'+
+    '<li>SCI-15 / 52 / 02 reproduced in the official format, with print</li>'+
+    '<li>Dak numbering — marker, date and a serial unique across India</li>'+
+    '<li>One-verification approvals — desktop and mobile</li>'+
+    '<li>Workflow board, calendar, registers, dashboard, reports</li>'+
+    '<li>Light and dark, and a mobile layout throughout</li>'+
   '</ul></div>'+
   '<div class="col plan"><h3 style="color:var(--gold)">Specified · later phases</h3><ul>'+
-    '<li>Full report set (G1–G6) with Excel / PDF export</li>'+
-    '<li>Actual PDF generation of SCI forms</li>'+
-    '<li>Pixel-exact SCI stationery (on receiving the originals)</li>'+
-    '<li>User & access management, agreed with DCC</li>'+
+    '<li>A single national counter for the running number, on the Beas server</li>'+
+    '<li>Excel / PDF export on the full report set</li>'+
+    '<li>SCI-56 stationery, on receiving the original</li>'+
+    '<li>Real authentication — the login switcher is a demonstration device</li>'+
+    '<li>User &amp; access management agreed with DCC</li>'+
+    '<li>Migration of the existing DHS and DMS records</li>'+
     '<li>Attachment compression on the Beas server</li>'+
-    '<li>Reminders & escalation on ageing thresholds</li>'+
+    '<li>Escalation on ageing thresholds</li>'+
   '</ul></div></div>'+
   '<div class="foot"><span class="b">DHS · R1</span><span>24 · Coverage</span></div></div>');
 
@@ -677,6 +878,35 @@ S.push('<div class="slide" style="justify-content:center;align-items:flex-start"
   '<div class="foot"><span class="b">DHS · R1</span><span>Thank you</span></div></div>');
 
 /* engine */
+/* the slides are written in the order they were built; this is the order they are shown in */
+(function(){
+  var want=[
+    'First demoable prototype','02 · Why','03 · The idea','04 · Defining topics','05 · Engine','Daily core',
+    '06 · Roles','Users & access','17 · Office scoping',
+    '07 · New Dak','09 · Gated forms','Compose','Dak numbering',
+    '08 · Dak Listing','Bulk actions','Reading pane','Reply · forward · copies',
+    '10 · One verification','OTP approval','11 · Mobile approval','Mobile','12 · Confidential & peer',
+    '13 · SCI Form space','14 · Form lifecycle','The official sheet','Approval limits','Editing the limits',
+    '16 · SCI-52 + SCI-02','SCI-02 picker',
+    '18 · Workflow board','19 · Workflow decks','Reminders & the Calendar','Calendar',
+    '20 · Registers','21 · Dashboard','22 · Report catalogue','23 · Light & dark',
+    '24 · Coverage','Thank you'
+  ];
+  function tag(h){ h=h.replace(/&amp;/g,'&');
+    var m=h.match(/<span>([^<]*)<\/span><\/div><\/div>'?$/); if(m) return m[1];
+    var all=h.match(/<div class="foot">[\s\S]*$/); if(!all) return '';
+    var t=all[0].match(/<span>([^<]*)<\/span>/g); return t? t[t.length-1].replace(/<\/?span>/g,'') : ''; }
+  var taken={}, out=[];
+  want.forEach(function(w){
+    for(var k=0;k<S.length;k++){ if(taken[k]) continue;
+      if(tag(S[k]).indexOf(w)>=0){ out.push(S[k]); taken[k]=1; return; } }
+  });
+  var drop=['15 · SCI-15'];   /* superseded by 'The official sheet' */
+  for(var k=0;k<S.length;k++){ if(taken[k]) continue;
+    var t=tag(S[k]); var skip=false; drop.forEach(function(d){ if(t.indexOf(d)>=0) skip=true; });
+    if(!skip) out.push(S[k]); }
+  S=out;
+})();
 var stage=document.getElementById('stage'), dots=document.getElementById('dots'), i=0;
 stage.innerHTML=S.join('');
 var slides=[].slice.call(stage.querySelectorAll('.slide'));

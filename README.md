@@ -48,14 +48,15 @@ Where an approval asks for a one-time code, use **`123456`**.
 - **Raise a dak.** *New Dak* → pick a Document Type and Subject. The path, the form and who decides
   are settled by the topic, not by the person raising it.
 - **Watch the value decide the office.** On an SCI-15, mark items capital or revenue and change the
-  cost — the approving office changes as you type.
+  cost — the approving office changes as you type. Nothing is approved at Satsang Place or Area level.
 - **Reply and forward.** Open a dak in the Inbox. Recipients are limited to what that dak's own route
   allows; copies are read-only and never enter anyone's pending list.
 - **Fill an SCI form.** *SCI Forms* → new. Use **Side by side** to watch the official sheet fill in as
   you type, then open it at actual size.
 - **Approve something.** Any approval asks for the one-time code.
-- **Change the rules.** As DHS Admin, open *Topics & Workflows* and edit a topic — including the value
-  limits. Changes publish a new version; dak already in flight keep the version they started under.
+- **Change the rules.** As DHS Admin, open *Topics & Workflows* and edit a topic. Tick *value-based*
+  to see the approval limits themselves — change a figure, publish, and routing follows at once. Dak
+  already in flight keep the version they started under.
 
 ---
 
@@ -63,6 +64,7 @@ Where an approval asks for a one-time code, use **`123456`**.
 
 - Topic-driven routing — the Document Type and Subject settle the path, the mode, the terminal
   authority, the mandatory forms and the value limits
+- One Dak ID per item — `L-260823-0147`, `F52-260823-0147` — issued at submission, never changed
 - Office-instance scoping — each office sees only its own dak, not everything at its level
 - Roles: signing authority, office staff, read-only, special status, department members, DHS Admin
 - Reply / forward with recipients and copies, bounded by the dak's route
@@ -76,7 +78,7 @@ Where an approval asks for a one-time code, use **`123456`**.
 - Any connection to SCM or the Beas systems
 - Real authentication — the login switcher is a demonstration device
 - Migration of the existing DHS and DMS records
-- The final numbering convention for all 191 areas (the scheme is settled; the codes are not loaded)
+- The central counter that issues the Dak ID (the scheme is settled; the prototype counts in the browser)
 
 ---
 
