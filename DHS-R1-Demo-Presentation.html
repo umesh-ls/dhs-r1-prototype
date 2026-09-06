@@ -240,7 +240,7 @@ S.push('<div class="slide"><div class="kicker">The engine</div><h2 style="margin
     '<li><b>Mode-based closure.</b> <span>Approval returns to the raiser; Information notes-and-closes at the top.</span></li>'+
     '<li><b>Verified at approval.</b> <span>A one-time code (OTP) to the authority\'s registered email or mobile — not merely a prior sign-in.</span></li>'+
   '</ul></div>'+
-  '<div><div class="callout"><b>Example — SCI-15 offer of items</b><div style="margin-top:12px" class="flow"><span class="node g" style="font-size:12px;padding:7px 11px">Satsang Place</span><span class="ar">→</span><span class="node g" style="font-size:12px;padding:7px 11px">Area HQ</span><span class="ar">→</span><span class="node" style="font-size:12px;padding:7px 11px">State decides</span></div><div style="margin-top:14px;font-size:13.5px;color:var(--ink2)">A capital offer of ₹20,000 → decided by the <b>State Office</b>. At ₹40,000 it moves to the <b>Zonal Office</b>; beyond ₹50,000, to <b>SCI</b>. Revenue items are stricter — ₹10,000 and ₹25,000. The terminal moves with the value, automatically.</div></div></div>'+
+  '<div><div class="callout"><b>Example — SCI-15 offer of items</b><div style="margin-top:12px" class="flow"><span class="node g" style="font-size:12px;padding:7px 11px">Satsang Place</span><span class="ar">→</span><span class="node g" style="font-size:12px;padding:7px 11px">Area HQ</span><span class="ar">→</span><span class="node" style="font-size:12px;padding:7px 11px">State decides</span></div><div style="margin-top:14px;font-size:13.5px;color:var(--ink2)">Nothing is approved at Satsang Place or Area. <b>State Office</b> — capital up to ₹25,000, revenue up to ₹10,000. <b>Zonal Office</b> — capital up to ₹50,000, revenue up to ₹25,000. The terminal moves with the value, automatically.</div></div></div>'+
   '</div><div class="foot"><span class="b">DHS · R1</span><span>05 · Engine</span></div></div>');
 
 /* 5b where the day goes */
@@ -345,7 +345,7 @@ S.push('<div class="slide"><div class="kicker">Daily core · Dak Listing</div><h
     '<div style="flex:1;border:1px solid var(--bd2);border-radius:9px;padding:11px">'+
       '<div style="font-size:13px;font-weight:800;color:var(--dark)">Solar panels for the Satsang Ghar</div>'+
       '<div style="font-size:8.5px;color:var(--mut2);font-family:monospace;margin:2px 0 8px">F15-260823-0152 &middot; With Zonal Office</div>'+
-      '<div style="font-size:9.5px;color:var(--txt);line-height:1.6">This proposal for a 25 kW solar installation is placed for sanction. The estimated value is ₹8,50,000; the enclosure SCI-15 carries the particulars…</div>'+
+      '<div style="font-size:9.5px;color:var(--txt);line-height:1.6">This proposal for a 25 kW solar installation is placed for sanction. The enclosure SCI-15 carries the particulars of the offer…</div>'+
       '<div style="margin-top:9px"><span class="bd bp">Enclosure &middot; F15-260823-0152</span></div>'+
       '<div style="margin-top:9px;font-size:8px;color:var(--mut);border-top:1px solid var(--bd);padding-top:7px">Trail: Raised at the Satsang Place → Recommended by the Area → Recommended by the State → With the Zonal Office</div></div>'+
     '</div>'})+'</div>'+
@@ -705,6 +705,7 @@ S.push('<div class="slide"><div class="kicker">Daily core · SCI forms</div><h2 
     '<li><b>Nothing is approved at Satsang Place or Area.</b> <span>Those offices raise and recommend; the decision sits above them.</span></li>'+
     '<li><b>Each item is capital or revenue.</b> <span>An offer of mixed items is totalled separately for each nature.</span></li>'+
     '<li><b>The higher requirement governs.</b> <span>Where both natures are present, the dak goes to whichever office the stricter limit demands.</span></li>'+
+    '<li><b>Above the Zonal limit is open.</b> <span>The limits given to us stop at the Zonal Office. What is approved beyond that is to be confirmed with Beas — the prototype routes it to SCI provisionally.</span></li>'+
     '<li><b>It settles as you type.</b> <span>The approving office on the letter changes the moment a cost is keyed.</span></li>'+
   '</ul>'+
   '<div>'+
@@ -713,12 +714,12 @@ S.push('<div class="slide"><div class="kicker">Daily core · SCI forms</div><h2 
       '<tr><th>Nature</th><th>Value band</th><th>Decided by</th></tr>'+
       '<tr><td>Capital</td><td>up to &#8377;25,000</td><td><b>State Office</b></td></tr>'+
       '<tr><td>Capital</td><td>up to &#8377;50,000</td><td><b>Zonal Office</b></td></tr>'+
-      '<tr><td>Capital</td><td>above that</td><td><b>SCI Office</b></td></tr>'+
+      '<tr><td>Capital</td><td colspan="2" style="color:var(--gold)">above the Zonal limit &mdash; <b>to be confirmed</b></td></tr>'+
       '<tr><td>Revenue</td><td>up to &#8377;10,000</td><td><b>State Office</b></td></tr>'+
       '<tr><td>Revenue</td><td>up to &#8377;25,000</td><td><b>Zonal Office</b></td></tr>'+
-      '<tr><td>Revenue</td><td>above that</td><td><b>SCI Office</b></td></tr>'+
+      '<tr><td>Revenue</td><td colspan="2" style="color:var(--gold)">above the Zonal limit &mdash; <b>to be confirmed</b></td></tr>'+
     '</table>'+
-    '<div style="margin-top:12px;font-size:11px;color:var(--maroon);border-top:1px solid var(--bd);padding-top:9px">Capital &#8377;40,000 + revenue &#8377;12,000 &rarr; on these values the offer is decided by the <b>Zonal Office</b></div>'+
+    '<div style="margin-top:12px;font-size:11px;color:var(--ink2);border-top:1px solid var(--bd);padding-top:9px">Where an offer carries both natures, the <b>higher requirement governs</b>. What is approved above the Zonal limit is still to be settled with Beas.</div>'+
     '</div></div>'+
   '</div></div>'+
   '<div class="foot"><span class="b">DHS · R1</span><span>Approval limits</span></div></div>');

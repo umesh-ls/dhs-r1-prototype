@@ -591,7 +591,7 @@ function natureTotals(d){ var t={Capital:0,Revenue:0};
   if(!t.Capital && !t.Revenue && d && +d.cost>0) t.Capital=+d.cost;
   return t; }
 function effTerminal(t, v){ return hasThreshold(t)? terminalForValue(t.form, v) : t.terminal; }
-function limitsNote(){ return 'Nothing is approved at Satsang Place or Area level. State Office &mdash; capital up to '+rupee(25000)+', revenue up to '+rupee(10000)+'. Zonal Office &mdash; capital up to '+rupee(50000)+', revenue up to '+rupee(25000)+'. Beyond that, SCI Office.'; }
+function limitsNote(){ return 'Nothing is approved at Satsang Place or Area level. State Office &mdash; capital up to '+rupee(25000)+', revenue up to '+rupee(10000)+'. Zonal Office &mdash; capital up to '+rupee(50000)+', revenue up to '+rupee(25000)+'. <span style="color:#b45309">What is approved above the Zonal limit is still to be confirmed &mdash; routed to the SCI Office provisionally.</span>'; }
 function isGeneral(t){ return t && t.dt==='MISCELLANEOUS'; }
 function addr(level){ var i=ORDER.indexOf(level); return {up:(i<ORDER.length-1?ORDER[i+1]:null), down:(i>0?ORDER[i-1]:null)}; }
 function rupee(n){ n=Math.round(+n||0); var s=String(n), r=s.length>3?s.slice(0,-3):'', l=s.slice(-3);
@@ -2043,7 +2043,7 @@ function bandEditor(t){ var B=bandsFor(t), LV=[['state','State Office'],['zone',
   var body=B.natures.map(function(nat){
     var rows=(B.rows[nat]||[]).map(function(b,i){ var last=(b.upto>=1e14);
       return '<tr><td>'+esc(nat)+'</td>'+
-        '<td>'+(last?'<span style="color:var(--mut2)">above the previous band</span>'
+        '<td>'+(last?'<span style="color:#b45309">above the previous band &mdash; to be confirmed</span>'
               :'up to &#8377; <input class="inp bnd" data-nat="'+esc(nat)+'" data-i="'+i+'" style="width:110px;display:inline-block" value="'+esc(String(b.upto))+'">')+'</td>'+
         '<td><select class="inp bndl" data-nat="'+esc(nat)+'" data-i="'+i+'" style="width:160px">'+LV.map(function(l){return '<option value="'+l[0]+'"'+(b.level===l[0]?' selected':'')+'>'+l[1]+'</option>';}).join('')+'</select></td></tr>'; }).join('');
     return rows; }).join('');

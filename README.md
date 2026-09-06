@@ -80,6 +80,13 @@ Where an approval asks for a one-time code, use **`123456`**.
 - Migration of the existing DHS and DMS records
 - The central counter that issues the Dak ID (the scheme is settled; the prototype counts in the browser)
 
+## Still to be settled with Beas
+
+- **What is approved above the Zonal limit on an SCI-15.** The limits we have been given stop at the
+  Zonal Office — capital ₹50,000, revenue ₹25,000. Anything larger is routed to the SCI Office
+  **provisionally**, and is marked as such on screen.
+- **The area codes**, if a reference of the office's own is ever to be quoted in outward correspondence.
+
 ---
 
 ## Feedback
