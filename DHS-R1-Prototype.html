@@ -283,6 +283,7 @@
       font-family:"Times New Roman",Times,serif;font-size:10.5pt;line-height:1.28}
   .sheet-a4.land{width:297mm;height:210mm;padding:8mm 10mm;overflow:hidden}
   .sheet-a4.port{width:210mm;min-height:297mm;padding:11mm 12mm}
+  .sheet-a4 table.g tr{page-break-inside:avoid}
   .sheet-a4,.sheet-a4 *{color:#000!important;box-sizing:border-box;font-family:"Times New Roman",Times,serif}
   .sheet-a4 b,.sheet-a4 th{font-weight:700}
   .sc{font-variant:small-caps}
@@ -311,11 +312,27 @@
   .yn{display:inline-block;border:1px solid #000;width:4.6mm;height:4mm;vertical-align:-.8mm;margin:0 1.2mm;text-align:center;line-height:3.6mm;font-size:8pt}
   .photo{width:34mm;height:26mm;border:1px solid #000;text-align:center;padding-top:10mm;
       font-weight:700;font-variant:small-caps;font-size:9pt}
+  /* rubber stamps applied to the papers once a decision is taken */
+  .stmpband{margin-top:3mm}
+  .stmp{display:inline-block;border:1.4px solid #2b3f7a;border-radius:1.6mm;padding:1.3mm 2.2mm;
+      min-width:42mm;text-align:center;line-height:1.22;margin:0 3.5mm 3.5mm 0;vertical-align:top}
+  .sheet-a4 .stmp,.sheet-a4 .stmp *{color:#2b3f7a!important}
+  .stmp .sa{display:block;font-weight:700;font-variant:small-caps;font-size:10pt;letter-spacing:.5px;
+      border-bottom:1px solid #2b3f7a;padding-bottom:.5mm;margin-bottom:.8mm}
+  .stmp .so{font-weight:700;font-size:9pt}
+  .stmp .sn{font-size:9pt}
+  .stmp .sd{font-size:7.5pt;letter-spacing:.2px}
+  .stmp.no{border-color:#8a2b2b}
+  .sheet-a4 .stmp.no,.sheet-a4 .stmp.no *{color:#8a2b2b!important}
+  .stmp.big{min-width:58mm;border-width:2px;padding:2.2mm 3.4mm}
+  .stmp.big .sa{font-size:12.5pt}
+  .a4wrap .sheet-a4+.sheet-a4{margin-top:18px}
   .rule{border-top:1.6px solid #000;margin-top:2mm}
   .qs td{padding:0 0 2.4mm;vertical-align:top;font-size:10.5pt}
   .qs td.n{width:10mm}
   @media(max-width:1100px){ .a4wrap{padding:8px} }
-  @media print{ .a4wrap{background:none;padding:0} .sheet-a4{box-shadow:none;width:auto;padding:0} }
+  @media print{ .a4wrap{background:none;padding:0} .sheet-a4{box-shadow:none;width:auto;padding:0}
+    .a4wrap .sheet-a4+.sheet-a4{margin-top:0;page-break-before:always} }
   .fsplit{display:block}
   .fsplit.both{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:15px;align-items:start}
   .fsplit.both .a4wrap{max-height:78vh;padding:9px}
@@ -349,7 +366,7 @@
   .dlgw{max-width:560px;width:92vw}
   .dlgsheet{max-width:none;width:min(96vw,1320px);max-height:94vh;display:flex;flex-direction:column}
   .dlgsheet .dlgb{padding:0;flex:1;min-height:0;overflow:auto}
-  .dlgsheet .a4wrap{border-radius:0;min-height:100%;display:flex;justify-content:center;align-items:flex-start}
+  .dlgsheet .a4wrap{border-radius:0;min-height:100%;display:flex;flex-direction:column;justify-content:flex-start;align-items:center}
   .a4wrap.fit .sheet-a4{transform-origin:top center;box-shadow:0 2px 18px rgba(0,0,0,.45)}
   .sheetbar{display:flex;align-items:center;gap:8px;margin-right:auto;font-size:11.5px;color:var(--mut)}
   .sheetbar button{border:1px solid var(--bd2);background:var(--surface);border-radius:7px;padding:4px 10px;font-size:11.5px;cursor:pointer;color:var(--txt)}
@@ -816,6 +833,7 @@ var ICONS={
  work:'<svg viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>',
  track:'<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
  workflow:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/></svg>',
+ approved:'<svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M20.6 8.3A9 9 0 1 1 15.7 3.4"/><path d="M21 4l-9 9"/></svg>',
  forms:'<svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg>',
  users:'<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.5"/><path d="M17 20a5.5 5.5 0 0 0-3-4.9"/></svg>',
  registers:'<svg viewBox="0 0 24 24"><path d="M2 4h6a3 3 0 0 1 3 3v13a2.5 2.5 0 0 0-2.5-2.5H2z"/><path d="M22 4h-6a3 3 0 0 0-3 3v13a2.5 2.5 0 0 1 2.5-2.5H22z"/></svg>',
@@ -824,7 +842,7 @@ var ICONS={
 };
 function buildNav(){
   var n=[['dash','Dashboard',null],['dak','Dak Listing', dakCount('await')||null],
-         ['LBL','Oversight'],['workflow','Workflow',null],['forms','SCI Forms',null],['registers','Registers',null],['reports','Reports',null],
+         ['LBL','Oversight'],['workflow','Workflow',null],['forms','SCI Forms',null],['approved','Approved Records',null],['registers','Registers',null],['reports','Reports',null],
          ['LBL','Administration'],['topics','Topics & Workflows',null],['users','User & Access', null, isAdmin()?null:false]];
   document.getElementById('nav').innerHTML=n.filter(function(x){ return x.length<4 || x[3]!==false; }).map(function(x){
     if(x[0]==='LBL') return '<div class="nl">'+x[1]+'</div>';
@@ -833,7 +851,7 @@ function buildNav(){
   }).join('');
 }
 function go(s){ screen=s; DETAIL_ID=null; CMP=null; buildNav();
-  var fn={dak:scrDak,dash:scrDash,start:scrStart,work:scrWork,track:scrTrack,workflow:scrWorkflow,forms:scrForms,formedit:scrFormEdit,registers:scrRegisters,reports:scrReports,topics:scrTopics,users:scrUsers}[s]||scrSoon;
+  var fn={dak:scrDak,dash:scrDash,start:scrStart,work:scrWork,track:scrTrack,workflow:scrWorkflow,forms:scrForms,formedit:scrFormEdit,approved:scrApproved,registers:scrRegisters,reports:scrReports,topics:scrTopics,users:scrUsers}[s]||scrSoon;
   document.getElementById('main').innerHTML=fn(); document.getElementById('main').scrollTop=0;
   closeSide(); if(isNarrow()) window.scrollTo(0,0);
 }
@@ -1149,7 +1167,10 @@ function submitDak(){
       if(!f._id)f._id=newFormId('SCI-15'); var fd=Object.assign({},f); delete fd._id; encl.push({code:'SCI-15',id:f._id,v:1,data:fd}); }
   } else {
     for(var fi=0;fi<reqForms.length;fi++){ var c=reqForms[fi]; if(!DRAFT.forms||!DRAFT.forms[c]||!DRAFT.forms[c]._done){ alert('Please complete '+c+' in the form space before submitting.'); return; } }
-    reqForms.forEach(function(c){ var d=DRAFT.forms[c]; encl.push({code:c,id:d._id,v:d._v||1,data:Object.assign({},d)}); });
+    /* the dak carries a snapshot of what the form actually said, not merely a pointer to it —
+       so the enclosure, and the approved copy issued later, read the same as the filed form */
+    reqForms.forEach(function(c){ var d=DRAFT.forms[c], r=(d&&d._recId)?findForm(d._recId):null;
+      encl.push({code:c,id:d._id,v:d._v||1,data:Object.assign({}, (r&&r.data)||{}, d)}); });
   }
   var term=effTerminal(t, formValueSplit());
   var offCh=officeChain(myOffice(), term), ch=offCh.map(function(oc){return OFF[oc].level;});
@@ -1407,14 +1428,15 @@ function a4_52(d){ initPlace(d); init52(d);
     '<div class="sigr" style="margin-top:5mm"><span class="sig">Secretary</span></div>'+
     '<div class="rule"></div>'+
     '<div style="text-align:center;font-weight:700;font-variant:small-caps;font-size:11pt">Recommendations of</div>'+
-    '<table class="lay" style="margin-top:3mm"><tr>'+
-      '<td style="width:50%;border-right:1.6px solid #000;padding-right:5mm">'+
-        '<table class="lay"><tr><td>'+scw('No:')+' '+fv('','w4')+'</td><td style="text-align:right">'+scw('Date:')+' '+fv('','w1')+'</td></tr></table>'+
-        '<div class="sigr" style="margin-top:4mm"><span class="sig">'+scw('Area Secretary')+'</span></div></td>'+
-      '<td style="padding-left:5mm">'+
-        '<table class="lay"><tr><td>'+scw('No:')+' '+fv('','w4')+'</td><td style="text-align:right">'+scw('Date:')+' '+fv('','w1')+'</td></tr></table>'+
-        '<div class="sigr" style="margin-top:5mm"><span class="sig">'+scw('Zonal Secretary')+'</span></div></td>'+
-    '</tr></table>'+
+    (function(){ var eA=endOfLevel(d,'area'), eZ=endOfLevel(d,'zone');
+      function box(e,title,pad,gap){
+        return '<table class="lay"><tr><td>'+scw('No:')+' '+fv(e?d._ref||'':'','w4')+'</td><td style="text-align:right">'+scw('Date:')+' '+fv(e?endWhen(e):'','w1')+'</td></tr></table>'+
+          '<div class="sigr" style="margin-top:'+(e?'1.4mm':gap)+'">'+(e?'<div style="font-size:9.5pt">'+esc(e.by)+'</div>':'')+
+          '<span class="sig">'+scw(title)+'</span></div>'; }
+      return '<table class="lay" style="margin-top:3mm"><tr>'+
+        '<td style="width:50%;border-right:1.6px solid #000;padding-right:5mm">'+box(eA,'Area Secretary','','4mm')+'</td>'+
+        '<td style="padding-left:5mm">'+box(eZ,'Zonal Secretary','','5mm')+'</td>'+
+      '</tr></table>'; })()+
     '<div style="font-size:9pt;margin-top:1mm">&#9312; &ndash; '+scw('(use designation as')+' S, P, M, CT, ACT, I, AI)</div>'+
   '</div>';
 }
@@ -1486,13 +1508,16 @@ function showSheet(title,html){ closeFormPdf();
     '</div></div>');
   fitSheet(); }
 function fitIn(wrap,pad,full){ if(!wrap) return 1;
-  var sh=wrap.querySelector('.sheet-a4'); if(!sh) return 1;
-  sh.style.transform='none'; sh.style.marginBottom='0';
-  var avail=wrap.clientWidth-(pad||26), w=sh.offsetWidth||1, h=sh.offsetHeight||1;
-  var k=full?1:Math.min(1, avail/w);
-  if(!isFinite(k)||k<=0) k=1;
-  sh.style.transform='scale('+k+')';
-  sh.style.marginBottom=(-(h*(1-k)))+'px';
+  var shs=wrap.querySelectorAll('.sheet-a4'); if(!shs.length) return 1;
+  var k=1, avail=wrap.clientWidth-(pad||26);
+  for(var i=0;i<shs.length;i++){ var sh=shs[i];
+    sh.style.transform='none'; sh.style.marginBottom='0';
+    var w=sh.offsetWidth||1, h=sh.offsetHeight||1;
+    k=full?1:Math.min(1, avail/w);
+    if(!isFinite(k)||k<=0) k=1;
+    sh.style.transformOrigin='top center';
+    sh.style.transform='scale('+k+')';
+    sh.style.marginBottom=(-(h*(1-k)))+'px'; }
   return k; }
 function fitSheet(){ var wrap=document.getElementById('sheet-wrap'); if(!wrap) return;
   var k=fitIn(wrap,26,SHEETZOOM==='full');
@@ -1838,6 +1863,7 @@ function dakDetailBody(it){
    '<div class="card"><h3>The communication</h3><div class="letter">'+(it.body||'<i>&mdash;</i>')+'</div>'+
      (it.atts.length?'<div style="margin-top:10px"><span class="lbl">Attachments</span> '+it.atts.map(function(f){return '<span class="badge bb">'+f+'</span>';}).join(' '):'')+'</div>'+
    enclosureCards(it)+
+   approvedCard(it)+
    threadCard(it)+
    '<div class="card" style="margin-top:14px"><h3>Trail</h3><ul class="trail">'+
      it.trail.map(function(tr){return '<li class="'+(tr.pending?'pending':'')+'"><div class="tw">'+tr.w+'</div><div class="tm">'+(tr.p?tr.p+' · ':'')+(tr.t?fmt(tr.t):'awaiting')+'</div>'+(tr.reply?'<div style="font-size:12px;color:var(--txt);margin-top:3px;padding:6px 9px;background:var(--soft);border-radius:6px">'+esc(tr.reply)+'</div>':'')+'</li>';}).join('')+
@@ -1924,7 +1950,8 @@ function closeGen(id){ var it=ITEMS.filter(function(x){return x.id===id;})[0];
   afterAct(id);
 }
 function recommend(id){ var it=ITEMS.filter(function(x){return x.id===id;})[0];
-  stamp(it); markFwd(it); lockFormsForward(it); it.trail.push({w:'Recommended by the '+LEVELNAME[USERS[me].level],p:USERS[me].n,t:new Date()});
+  stamp(it); markFwd(it); lockFormsForward(it); addEndorse(it,'Recommended');
+  it.trail.push({w:'Recommended by the '+LEVELNAME[USERS[me].level],p:USERS[me].n,t:new Date()});
   it.step++; var nxt=it.chain[it.step], term=it.step===it.chain.length-1;
   it.status='With '+LEVELNAME[nxt]+(term?(it.mode==='info'?' · for information':' · to approve'):' · recommending'); it.badge='ba';
   it.trail.push({w:'Pending — with the '+LEVELNAME[nxt],t:null,pending:true});
@@ -1934,6 +1961,7 @@ function approve(id){ askVerify(1, function(){ doApprove(id); }); }
 function doApprove(id){ var it=ITEMS.filter(function(x){return x.id===id;})[0];
   stamp(it); it.trail.push({w:'Approved by the '+LEVELNAME[USERS[me].level]+' — verified by OTP',p:USERS[me].n,t:new Date(),});
   it.closed=true; it.badge='bg';
+  issueApprovalOutputs(it,'Approved');
   it.status='Approved · decision with the '+LEVELNAME[it.raiser];
   it.trail.push({w:'Decision returned to the '+LEVELNAME[it.raiser],t:new Date()});
   if(it.handoff){ it.status='Approved · handed to '+it.handoff.split(',')[0]; it.trail.push({w:'Handed to '+it.handoff,t:new Date()}); }
@@ -1943,6 +1971,7 @@ function notApprove(id){ var it=ITEMS.filter(function(x){return x.id===id;})[0];
   var r=prompt('Reason for not approving (recorded in the trail):'); if(!r) return;
   stamp(it); it.closed=true; it.badge='br'; it.status='Not approved';
   it.trail.push({w:'Not approved by the '+LEVELNAME[USERS[me].level],p:USERS[me].n,t:new Date()});
+  issueApprovalOutputs(it,'Not approved',r);
   it.trail.push({w:'Decision returned to the '+LEVELNAME[it.raiser]+' — reason: '+r,t:new Date()});
   afterAct(id);
 }
@@ -1950,6 +1979,319 @@ function closeInfo(id){ var it=ITEMS.filter(function(x){return x.id===id;})[0];
   stamp(it); it.closed=true; it.badge='bg'; it.status='Closed · noted for the record';
   it.trail.push({w:'Noted and closed at the '+LEVELNAME[USERS[me].level]+' — information only',p:USERS[me].n,t:new Date()});
   afterAct(id);
+}
+
+/* ===================== Approved records =====================================
+   The moment a dak is decided, the system writes the outputs itself:
+     · an Approval Letter, on the deciding office's paper
+     · a duly approved copy of every SCI form enclosed on it
+   Both are kept permanently and are open to every office on the dak's route.
+   No new number is minted — an output belongs to the dak that produced it.    */
+var APPROVED=[];                       /* {dakId, kind:'letter'|'form', code, at, by, byName, office, decision, reason} */
+
+function approvedFor(dakId,kind,code){
+  return APPROVED.filter(function(a){ return a.dakId===dakId && a.kind===kind && (!code||a.code===code); })[0]; }
+function approvedOf(it){ return APPROVED.filter(function(a){ return a.dakId===it.id; }); }
+function itemById(id){ return ITEMS.filter(function(x){return x.id===id;})[0]; }
+
+/* called the instant a decision is taken — approved, not approved, or noted */
+function issueApprovalOutputs(it, decision, reason){
+  if(!it || approvedFor(it.id,'letter')) return;
+  var now=new Date(), off=myOffice();
+  backfillEndorsements(it, decision||'Approved', now);
+  var rec={
+    dakId:it.id, kind:'letter', code:'LETTER', at:now, by:me, byName:meU().n,
+    office:off, decision:decision||'Approved', reason:reason||'' };
+  APPROVED.push(rec);
+  /* every SCI form enclosed on the dak gets an approved copy of its own */
+  (it.enclosures||[]).forEach(function(e){
+    APPROVED.push({dakId:it.id, kind:'form', code:e.code, formId:e.id, at:now, by:me, byName:meU().n,
+                   office:off, decision:decision||'Approved', reason:reason||''});
+    var fr=findForm(e.id); if(fr){ fr.approved=(decision!=='Not approved'); fr.approvedAt=now; fr.approvedBy=meU().n; fr.approvedOff=off; fr.decision=decision||'Approved'; }
+  });
+  if(it.formData && !(it.enclosures||[]).length && it.form){
+    APPROVED.push({dakId:it.id, kind:'form', code:it.form, formId:null, at:now, by:me, byName:meU().n,
+                   office:off, decision:decision||'Approved', reason:reason||''});
+  }
+  it.approvedAt=now; it.approvedBy=meU().n; it.approvedOff=off; it.decision=decision||'Approved';
+  it.trail.push({w:'Approval Letter and approved forms generated',t:now,n:'Available to every office on this dak.'});
+}
+
+/* who may open them — every office the dak passed through, and the raiser */
+function mayOpenApproved(it){ if(!it) return false;
+  var oc=ocOf(it), mine=myOffice();
+  return oc.indexOf(mine)>=0 || it.raiserOff===mine || isCopyTo(it,mine); }
+function approvedVisible(){
+  return APPROVED.filter(function(a){ var it=itemById(a.dakId); return it && mayOpenApproved(it) && canView(it); }); }
+
+/* ---------- endorsements: the stamp each authority puts on the papers ----------
+   Every office that handles the dak leaves one stamp — the Satsang Place that signed
+   and submitted it, each office that recommended it onward, and the office that decided.
+   The stamps are what make an approved form self-evidencing: it shows, on its face,
+   who recommended and who approved, and on what date. No office mints a number of its
+   own — every stamp quotes the dak's own reference.                                   */
+var ENDORSE={};
+var AUTHTITLE={place:'Secretary / Incharge',area:'Area Secretary',state:'State Secretary',
+               zone:'Zonal Secretary',sci:'Sewadar I/C, Satsang Centres in India'};
+function authTitle(off){ var o=OFF[off]||{}; return AUTHTITLE[o.level]||LEVELNAME[o.level]||''; }
+function authOfOffice(off){ var k=Object.keys(USERS).filter(function(u){
+    return USERS[u].office===off && USERS[u].kind==='auth'; })[0];
+  return k? USERS[k].n : authTitle(off); }
+function endList(it){ if(!ENDORSE[it.id]) ENDORSE[it.id]=[]; return ENDORSE[it.id]; }
+function addEndorse(it, act, off, who, when){
+  if(!it) return null; var l=endList(it); off=off||myOffice();
+  for(var i=0;i<l.length;i++) if(l[i].off===off){ l[i].act=act; return l[i]; }
+  var e={off:off, level:(OFF[off]||{}).level, by:who||meU().n, title:authTitle(off),
+         at:when||new Date(), act:act, ref:it.id};
+  l.push(e); return e; }
+function endWhen(e){ return e&&e.at? (fmt(e.at)+' '+e.at.getFullYear()) : ''; }
+/* in the order the dak actually travelled */
+function endorsements(it){ if(!it) return []; var oc=ocOf(it), l=(ENDORSE[it.id]||[]).slice();
+  l.sort(function(a,b){ var i=oc.indexOf(a.off), j=oc.indexOf(b.off);
+    if(i<0) i=99; if(j<0) j=99; return (i-j) || (a.at-b.at); });
+  return l; }
+function endOfLevel(d,lvl){ var l=(d&&d._end)||[]; for(var i=0;i<l.length;i++) if(l[i].level===lvl) return l[i]; return null; }
+function endOfOffice(it,off){ var l=endorsements(it); for(var i=0;i<l.length;i++) if(l[i].off===off) return l[i]; return null; }
+/* an office that handed the dak on before the stamps were kept still shows on the papers —
+   its date is read back from the dak's own trail rather than invented */
+function trailTimeFor(it, off){ var nm=LEVELNAME[(OFF[off]||{}).level]||'';
+  var hit=(it.trail||[]).filter(function(x){ return x.t && nm && (x.w||'').indexOf(nm)>=0 &&
+      /Recommend|Approved|Forwarded|Submitted|Raised|Signed/i.test(x.w||''); })[0];
+  return hit? hit.t : null; }
+function backfillEndorsements(it, decision, now){
+  var oc=ocOf(it), mine=myOffice(), last=oc.indexOf(mine); if(last<0) last=oc.length-1;
+  for(var i=0;i<last;i++){ if(endOfOffice(it,oc[i])) continue;
+    addEndorse(it, (i===0?'Submitted':'Recommended'), oc[i], authOfOffice(oc[i]),
+               trailTimeFor(it,oc[i])||now||new Date()); }
+  addEndorse(it, decision, mine, meU().n, now||new Date()); }
+
+/* ---------- the stamp itself ---------- */
+function stampBox(e, big){ if(!e) return '';
+  var no=(e.act==='Not approved');
+  return '<span class="stmp'+(no?' no':'')+(big?' big':'')+'">'+
+    '<span class="sa">'+esc(e.act)+'</span>'+
+    '<span class="so">'+esc((OFF[e.off]||{}).name||e.off)+'</span><br>'+
+    '<span class="sn">'+esc(e.by||'')+'</span><br>'+
+    '<span class="sd">'+esc(e.title||'')+' &middot; '+esc(endWhen(e))+'</span><br>'+
+    '<span class="sd">'+scw('Ref.')+' '+esc(e.ref||'')+'</span>'+
+  '</span>'; }
+function stampBand(it){ var l=endorsements(it); if(!l.length) return '';
+  return '<div class="stmpband">'+l.map(function(e){ return stampBox(e); }).join('')+'</div>'; }
+
+/* ---------- the endorsement page that travels with an approved form ---------- */
+function endorseSheet(it, code){
+  var a=approvedFor(it.id,'form',code)||approvedFor(it.id,'letter'); if(!a) return '';
+  var notApp=(a.decision==='Not approved'), l=endorsements(it);
+  return '<div class="sheet-a4 port">'+
+    '<table class="lay"><tr><td style="width:17mm">'+RSSB_LOGO+'</td>'+
+      '<td class="ftitle">'+scw('Satsang Centres in India')+'<br>'+
+        scw(notApp?'Endorsement \u2014 Not Approved':'Endorsement of Approval')+'</td>'+
+      '<td class="fno" style="width:30mm">'+esc(code)+'</td></tr></table>'+
+    '<table class="lay" style="margin-top:4mm"><tr>'+
+      '<td>'+scw('Ref. No.:')+' <b>'+esc(it.id)+'</b></td>'+
+      '<td style="text-align:right;width:46mm">'+scw('Date:')+' '+fv(fmt(a.at)+' '+a.at.getFullYear(),'w2')+'</td></tr></table>'+
+    '<div style="margin-top:6mm;text-align:justify">'+
+      'This endorsement belongs to the <b>'+esc(code)+'</b> filed with the dak cited above and is to be read with it. '+
+      'It carries the stamp of every authority in the reporting line, in the order the dak travelled. '+
+      (notApp? 'The proposal <b>has not been approved</b>.'
+             : 'The form on the preceding page <b>stands duly approved</b>.')+'</div>'+
+    (a.reason? '<div style="margin-top:3mm">'+scw('Reason recorded:')+' '+esc(a.reason)+'</div>':'')+
+    '<div style="margin-top:7mm;font-weight:700;font-variant:small-caps;font-size:11pt">'+
+      scw('Stamps of the authorities')+'</div>'+
+    stampBand(it)+
+    '<div class="rule" style="margin-top:6mm"></div>'+
+    '<div style="margin-top:2mm;font-size:9.5pt">'+
+      scw('Generated by the Dak Handling System when the decision was recorded. No separate number is issued \u2014 every stamp quotes the dak\u2019s own reference.')+'</div>'+
+  '</div>'; }
+
+/* ---------- what was actually approved, set out in the letter ----------------
+   The letter is what goes to the Satsang Place and is handed to the committee; the
+   SCI-52 itself stays on the office record. So the letter carries the particulars —
+   who is appointed, who continues, who stands relieved, and how the committee now
+   reads — rather than merely citing the form.                                     */
+function enclData(it,code){ var e=(it.enclosures||[]).filter(function(x){return x.code===code;})[0];
+  if(e&&e.data&&Object.keys(e.data).length>3) return e.data;
+  var r=e? findForm(e.id):null; return (r&&r.data)||(e&&e.data)||null; }
+function desigFull(c){ return DESIG[c]||c||''; }
+function letterPara(n,txt){ return '<div style="margin-top:3.4mm;text-align:justify">'+n+'.&nbsp;&nbsp; '+txt+'</div>'; }
+function letterTable(head,rows,width){
+  return '<table class="g" style="margin-top:2mm;width:'+(width||'96%')+';table-layout:fixed"><tr>'+
+    head.map(function(h){ return '<th'+(h[1]?' style="width:'+h[1]+'"':'')+'>'+h[0]+'</th>'; }).join('')+'</tr>'+
+    rows.map(function(r){ return '<tr>'+r.map(function(c,i){
+      return '<td'+(i===0?' class="c"':'')+'>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</table>'; }
+
+function sum52(it,d){
+  var ex=(d.exist||[]), ad=(d.adds||[]), out='', n=1;
+  var leaving=ex.filter(function(m){ return LEAVES.indexOf(m.outcome)>=0; });
+  var staying=ex.filter(function(m){ return LEAVES.indexOf(m.outcome)<0; });
+  var moved  =staying.filter(function(m){ return m.rec && m.desig && m.rec!==m.desig; });
+  if(ad.length) out+=letterPara(++n,
+    'The following '+(ad.length===1?'sewadar is':'sewadars are')+' <b>appointed to the committee</b>, '+
+    'the bio-data of each having been furnished on Form SCI-02 and found in order:')+
+    letterTable([['Sr.','9%'],['Name','30%'],['Father\u2019s / Husband\u2019s Name','26%'],['Sewa approved','20%'],['Bio-data','15%']],
+      ad.map(function(m,i){ var b=m.bio||{}; return [String(i+1)+'.', esc(m.name||''), esc(b.father||''),
+        esc(desigFull(m.desig)), 'SCI-02 enclosed']; }));
+  if(staying.length) out+=letterPara(++n,
+    'The following '+(staying.length===1?'sewadar continues':'sewadars continue')+' on the committee:')+
+    letterTable([['Sr.','9%'],['Name','36%'],['Sewa held','25%'],['Sewa approved','30%']],
+      staying.map(function(m,i){ return [String(i+1)+'.', esc(m.name||''), esc(desigFull(m.desig)),
+        esc(desigFull(m.rec||m.desig))+((m.rec&&m.desig&&m.rec!==m.desig)?' &mdash; change of designation':'')]; }));
+  if(leaving.length) out+=letterPara(++n,
+    'The following '+(leaving.length===1?'sewadar stands':'sewadars stand')+' relieved of committee sewa:')+
+    letterTable([['Sr.','9%'],['Name','34%'],['Sewa held','22%'],['Reason','35%']],
+      leaving.map(function(m,i){ return [String(i+1)+'.', esc(m.name||''), esc(desigFull(m.desig)),
+        esc(m.outcome||'')+(m.note?' &mdash; '+esc(m.note):'')]; }));
+  var full=staying.map(function(m){ return {n:m.name, g:(m.rec||m.desig), w:'Continuing'}; })
+      .concat(ad.map(function(m){ return {n:m.name, g:m.desig, w:'Newly appointed'}; }));
+  if(full.length) out+=letterPara(++n,
+    'The committee of <b>'+esc(d.place||'the Satsang Place')+'</b>, as approved, shall accordingly read as under:')+
+    letterTable([['Sr.','9%'],['Name','40%'],['Sewa','26%'],['Remarks','25%']],
+      full.map(function(m,i){ return [String(i+1)+'.', esc(m.n||''), esc(desigFull(m.g)), esc(m.w)]; }));
+  if(moved.length||ad.length||leaving.length) out+=letterPara(++n,
+    'The particulars above are as recommended on Form SCI-52 filed under this reference, which remains on the office record. '+
+    'This letter may be handed to the committee.');
+  return out; }
+
+function sum15(it,d){
+  var rows=(d.rows||[]).filter(function(r){ return (r.item||'')||(+r.cost||0); }), out='', n=1, tot=0;
+  if(!rows.length) return '';
+  rows.forEach(function(r){ tot+=(+r.cost||0); });
+  out+=letterPara(++n,'The following '+(rows.length===1?'item stands':'items stand')+' <b>sanctioned</b>:')+
+    letterTable([['Sr.','9%'],['Particulars','47%'],['Nature','20%'],['Amount (Rs.)','24%']],
+      rows.map(function(r,i){ return [String(i+1)+'.', esc(r.item||''), esc(r.nature||''),
+        (+r.cost? rupee(+r.cost):'')]; }));
+  out+=letterPara(++n,'The total sanctioned against this reference is <b>Rs. '+rupee(tot)+'</b>, '+
+    'to be adjusted in the accounts of the Satsang Place in the usual manner.');
+  return out; }
+
+function sum02(it,d){
+  if(!d||!d.name) return '';
+  return letterPara(2,'The appointment of <b>'+esc([d.title,d.name,d.last].filter(Boolean).join(' '))+'</b>, '+
+    (d.father?'son / wife of '+esc(d.father)+', ':'')+
+    'initiated on '+esc(d.doi||'\u2014')+', stands approved on the particulars furnished on Form SCI-02 filed under this reference.'); }
+
+function changeSummary(it){
+  var d52=enclData(it,'SCI-52'); if(d52) return sum52(it,d52);
+  var d15=enclData(it,'SCI-15'); if(d15) return sum15(it,d15);
+  var d02=enclData(it,'SCI-02'); if(d02) return sum02(it,d02);
+  return ''; }
+
+/* ---------- the Approval Letter, on an A4 sheet ---------- */
+function approvalLetter(it){
+  var a=approvedFor(it.id,'letter'); if(!a) return '<div class="sheet-a4 port"><div class="ftitle">No approval letter</div></div>';
+  var decOff=OFF[a.office]||{name:LEVELNAME[it.terminal],short:''};
+  var toOff=OFF[it.raiserOff]||{name:LEVELNAME[it.raiser]};
+  var chain=ocOf(it), notApp=(a.decision==='Not approved');
+  return '<div class="sheet-a4 port">'+
+    '<table class="lay"><tr>'+
+      '<td style="width:17mm">'+RSSB_LOGO+'</td>'+
+      '<td class="ftitle">'+scw('Satsang Centres in India')+'<br>'+scw(decOff.name)+'</td>'+
+      '<td class="fno" style="width:30mm">'+(notApp?'NOT APPROVED':'APPROVAL')+'</td></tr></table>'+
+    '<table class="lay" style="margin-top:4mm"><tr>'+
+      '<td>'+scw('Ref. No.:')+' <b>'+esc(it.id)+'</b></td>'+
+      '<td style="text-align:right;width:46mm">'+scw('Date:')+' '+fv(fmt(a.at)+' '+a.at.getFullYear(),'w2')+'</td></tr></table>'+
+    '<div style="margin-top:6mm">'+scw('To')+'</div>'+
+    '<div>'+scw('The Secretary / Incharge')+'</div>'+
+    '<div>'+esc(toOff.name)+'</div>'+
+    '<div style="margin-top:6mm"><b>'+scw('Subject:')+' '+esc(titleCase(it.subj))+'</b></div>'+
+    '<div style="margin-top:5mm">'+scw('Dear Brother,')+'</div>'+
+    '<div style="margin-top:3mm;text-align:justify">'+
+      (notApp
+        ? 'With reference to your letter cited above under <b>'+esc(it.id)+'</b> on the subject of <b>'+esc(titleCase(it.subj))+'</b>, it is regretted that the proposal <b>has not been approved</b>.'
+        : 'With reference to your letter cited above under <b>'+esc(it.id)+'</b> on the subject of <b>'+esc(titleCase(it.subj))+'</b>, approval is hereby <b>accorded</b> as proposed, having been recommended at each level in the reporting line.')+
+    '</div>'+
+    (a.reason? '<div style="margin-top:3mm">'+scw('Reason:')+' '+esc(a.reason)+'</div>' : '')+
+    (notApp? '' : changeSummary(it))+
+    ((it.enclosures||[]).length? '<div style="margin-top:4mm">'+scw('The following form(s) stand duly approved and are enclosed:')+
+       '<table class="g" style="margin-top:2mm;width:94%;table-layout:fixed"><tr><th style="width:16%">Form</th><th style="width:52%">Particulars</th><th style="width:32%">Reference</th></tr>'+
+       it.enclosures.map(function(e){ return '<tr><td class="c">'+esc(e.code)+'</td><td>'+esc(formName(e.code))+'</td><td class="c">'+esc(e.id||it.id)+'</td></tr>'; }).join('')+
+       '</table></div>' : '')+
+    '<div style="margin-top:4mm">'+scw('This letter is generated by the Dak Handling System on the decision being recorded, and is available to every office in the chain below.')+'</div>'+
+    '<table class="lay" style="margin-top:7mm"><tr>'+
+      '<td style="vertical-align:bottom;width:64mm">'+stampBox(endOfOffice(it,a.office),true)+'</td>'+
+      '<td style="vertical-align:bottom;text-align:right;padding-top:8mm"><span class="sig">'+esc(a.byName)+
+        '<br><span style="font-size:8.5pt">'+esc(decOff.name)+'</span></span></td></tr></table>'+
+    '<div style="margin-top:3mm;font-size:9pt">'+scw('The stamp above is that of the final approving authority. Verified by one-time code at the time of approval.')+'</div>'+
+    '<div class="rule"></div>'+
+    '<div style="margin-top:3mm;font-size:9.5pt">'+scw('Distribution')+' &mdash; '+chain.map(function(o){return esc((OFF[o]||{}).name||o);}).join(' &middot; ')+
+      ((it.copies&&it.copies.length)? ' &nbsp;|&nbsp; '+scw('Copy')+' &mdash; '+it.copies.map(function(o){return esc((OFF[o]||{}).name||o);}).join(' &middot; ') : '')+'</div>'+
+  '</div>';
+}
+
+/* ---------- an SCI form with the approval endorsed on it ---------- */
+function approvedFormSheet(it, code){
+  var a=approvedFor(it.id,'form',code), e=(it.enclosures||[]).filter(function(x){return x.code===code;})[0];
+  var data=e? e.data : it.formData;
+  if(a && data){ data._end=endorsements(it); data._ref=it.id; }
+  var body=a4Sheet(code, data);
+  if(!a) return body;
+  /* the form keeps its official format untouched; the stamps of every authority
+     travel with it on an endorsement page, which is where they are read from */
+  return body + endorseSheet(it, code);
+}
+
+/* ---------- viewers ---------- */
+function openApprovalLetter(dakId){ var it=itemById(dakId); if(!it) return;
+  showSheet('Approval Letter &mdash; '+esc(it.id), approvalLetter(it)); }
+function openApprovedForm(dakId, code){ var it=itemById(dakId); if(!it) return;
+  showSheet(code+' &mdash; duly approved &mdash; '+esc(it.id), approvedFormSheet(it, code)); }
+
+/* ---------- the record screen ---------- */
+var APTAB='letters', APQ='';
+function setApTab(t){ APTAB=t; go('approved'); }
+function setApQ(v){ APQ=v; go('approved'); }
+function apMatch(a){ if(!APQ) return true; var it=itemById(a.dakId)||{}; var q=APQ.toLowerCase();
+  return (a.dakId||'').toLowerCase().indexOf(q)>=0 || (it.subj||'').toLowerCase().indexOf(q)>=0 || (a.code||'').toLowerCase().indexOf(q)>=0; }
+function scrApproved(){
+  var all=approvedVisible().filter(apMatch);
+  var letters=all.filter(function(a){return a.kind==='letter';}).sort(function(x,y){return y.at-x.at;});
+  var forms=all.filter(function(a){return a.kind==='form';}).sort(function(x,y){return y.at-x.at;});
+  var rows=(APTAB==='letters'?letters:forms);
+  var tabs=[['letters','Approval Letters',letters.length],['forms','Approved SCI Forms',forms.length]];
+  var body=rows.length? rows.map(function(a,i){ var it=itemById(a.dakId)||{};
+      var notApp=(a.decision==='Not approved');
+      return '<div class="row" style="grid-template-columns:40px 150px 96px 1fr 130px 128px 108px;gap:9px;padding:10px 8px;align-items:center">'+
+        '<span style="color:var(--mut2);font-size:11px;text-align:right">'+(i+1)+'</span>'+
+        '<span class="mono" style="font-size:11px;color:var(--mut)">'+esc(a.dakId)+'</span>'+
+        '<span>'+(a.kind==='letter'?'<span class="badge bp">Letter</span>':'<span class="badge bp">'+esc(a.code)+'</span>')+'</span>'+
+        '<span style="font-size:12px;color:var(--ink);font-weight:600">'+esc(titleCase(it.subj||''))+'</span>'+
+        '<span style="font-size:11px;color:var(--mut)">'+esc((OFF[it.raiserOff]||{}).short||'')+'</span>'+
+        '<span><span class="badge '+(notApp?'br':'bg')+'">'+esc(a.decision)+'</span><br><span style="font-size:10px;color:var(--mut2)">'+fmt(a.at)+'</span></span>'+
+        '<span style="text-align:right"><button class="btn btns" style="padding:4px 10px;font-size:11px" onclick="'+
+          (a.kind==='letter'?('openApprovalLetter(\''+a.dakId+'\')'):('openApprovedForm(\''+a.dakId+'\',\''+a.code+'\')'))+'">Open / print</button></span>'+
+      '</div>'; }).join('')
+    : '<div style="padding:40px;text-align:center;color:var(--mut2);font-size:12.5px">Nothing yet. An approval letter and a duly approved copy of every enclosed form are written the moment a dak is decided.</div>';
+  return '<div class="pt">Approved Records</div>'+
+    '<div class="ps">Written by the system on approval &mdash; open to every office on the dak&rsquo;s route</div>'+
+    '<div class="dtabs">'+tabs.map(function(t){ return '<span class="dtab'+(APTAB===t[0]?' on':'')+'" onclick="setApTab(\''+t[0]+'\')">'+t[1]+'<span class="dcnt">'+t[2]+'</span></span>'; }).join('')+'</div>'+
+    '<div style="display:flex;gap:8px;margin-bottom:10px"><input class="fq" style="flex:1" placeholder="Search by Dak No., subject or form" value="'+esc(APQ)+'" onchange="setApQ(this.value)">'+
+      (APQ?'<button class="btn btns" onclick="setApQ(\'\')">Clear</button>':'')+'</div>'+
+    '<div class="card" style="padding:0">'+
+      '<div class="row" style="grid-template-columns:40px 150px 96px 1fr 130px 128px 108px;gap:9px;padding:8px;background:var(--soft);font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700">'+
+        '<span style="text-align:right">S.No</span><span>Dak No.</span><span>Document</span><span>Subject</span><span>Raised by</span><span>Decision</span><span></span></div>'+
+      body+'</div>'+
+    '<div style="font-size:11.5px;color:var(--mut);margin-top:11px;line-height:1.6">Neither carries a number of its own &mdash; an approval letter and an approved form belong to the dak that produced them, and quote its reference. '+
+      'The record is permanent: it is not affected by anything that happens to the dak afterwards.</div>';
+}
+
+/* ---------- the approved outputs, shown on the dak itself ---------- */
+function approvedCard(it){
+  var mine=approvedOf(it); if(!mine.length || !mayOpenApproved(it)) return '';
+  var a=mine.filter(function(x){return x.kind==='letter';})[0];
+  var fs=mine.filter(function(x){return x.kind==='form';});
+  var notApp=a && a.decision==='Not approved';
+  return '<div class="card" style="margin-top:14px;border-color:'+(notApp?'#e7c4c4':'#bbf7d0')+'">'+
+    '<h3>'+(notApp?'Decision &mdash; not approved':'Approved &mdash; what the system has issued')+'</h3>'+
+    '<div style="font-size:11.5px;color:var(--mut);margin-bottom:11px">Written automatically when the decision was recorded'+(a?(' by '+esc(a.byName)+' on '+fmt(a.at)):'')+'. Open to every office on this dak.</div>'+
+    '<div style="display:flex;gap:9px;flex-wrap:wrap">'+
+      (a?'<button class="btn btnp bsm" onclick="openApprovalLetter(\''+it.id+'\')">Approval letter</button>':'')+
+      fs.map(function(f){ return '<button class="btn btns bsm" onclick="openApprovedForm(\''+it.id+'\',\''+f.code+'\')">'+esc(f.code)+' &mdash; duly approved</button>'; }).join('')+
+    '</div>'+
+    '<div style="font-size:11px;color:var(--mut);margin-top:10px;line-height:1.6">The approved form carries the stamp of '+
+      endorsements(it).length+' '+(endorsements(it).length===1?'authority':'authorities')+' &mdash; '+
+      endorsements(it).map(function(e){ return esc((OFF[e.off]||{}).short||e.off)+' ('+esc(e.act.toLowerCase())+')'; }).join(' &middot; ')+
+      '. The letter carries the stamp of the final approving authority.</div>'+
+    '</div>';
 }
 
 /* ==== TOPICS admin (browse; edit is Stage 5) ==== */
@@ -2527,14 +2869,16 @@ function emailish(){ return (USERS[me].n||'').toLowerCase().replace(/^(sh\.|smt\
 function mActLabel(it){ return it.step===it.chain.length-1 ? (it.mode==='info'?'note':'approve') : 'recommend'; }
 function actApprove(it, note){
   var isT=it.step===it.chain.length-1;
-  if(!isT){ stamp(it); markFwd(it); lockFormsForward(it); it.trail.push({w:'Recommended by the '+LEVELNAME[USERS[me].level],p:USERS[me].n,t:new Date(),n:note});
+  if(!isT){ stamp(it); markFwd(it); lockFormsForward(it); addEndorse(it,'Recommended');
+    it.trail.push({w:'Recommended by the '+LEVELNAME[USERS[me].level],p:USERS[me].n,t:new Date(),n:note});
     it.step++; var nxt=it.chain[it.step], term=it.step===it.chain.length-1;
     it.status='With '+LEVELNAME[nxt]+(term?(it.mode==='info'?' · for information':' · to approve'):' · recommending'); it.badge='ba';
     it.trail.push({w:'Pending — with the '+LEVELNAME[nxt],t:null,pending:true}); }
   else if(it.mode==='info'){ stamp(it); it.closed=true; it.badge='bg'; it.status='Closed · noted for the record';
     it.trail.push({w:'Noted and closed at the '+LEVELNAME[USERS[me].level]+' — information only',p:USERS[me].n,t:new Date(),n:note}); }
   else { stamp(it); it.trail.push({w:'Approved by the '+LEVELNAME[USERS[me].level],p:USERS[me].n,t:new Date(),n:note});
-    it.closed=true; it.badge='bg'; it.status='Approved · decision with the '+LEVELNAME[it.raiser];
+    it.closed=true; it.badge='bg'; issueApprovalOutputs(it,'Approved');
+    it.status='Approved · decision with the '+LEVELNAME[it.raiser];
     it.trail.push({w:'Decision returned to the '+LEVELNAME[it.raiser],t:new Date()});
     if(it.handoff){ it.status='Approved · handed to '+it.handoff.split(',')[0]; it.trail.push({w:'Handed to '+it.handoff,t:new Date()}); } }
 }

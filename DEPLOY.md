@@ -8,9 +8,16 @@ publish/
   DHS-R1-Prototype.html               the prototype
   DHS-R1-Demo-Presentation.html       the walkthrough deck
   DHS-R1-Demo-Presentation.pdf        the deck as PDF
+  DHS-R1-SCI52-Walkthrough.html       one case followed end to end
+  DHS-R1-SCI52-Walkthrough.pdf        the same, as PDF
   README.md                           shown on the repo page
   .nojekyll                           stops GitHub reprocessing the files
 ```
+
+Eight files, about 7 MB in all. The two decks are the largest, at roughly 2 MB each — they carry the
+official sheets as images inside the file itself, so that they read at full size and the file still
+works with no internet connection. GitHub's web upload takes files far larger than this; it is only
+the upload that takes a moment longer.
 
 ---
 
@@ -74,9 +81,26 @@ The **Actions** tab shows the deployment; a green tick means it is live.
 
 ### 4. Check it before sending the link
 
-- The landing page opens and both buttons work
+- The landing page opens and every button works — there are three cards now, not two
 - In the prototype: switch logins, open a dak, open an SCI form and use **Side by side**
+- Approve something with the code `123456`, then open the **Approval Letter** and the **duly approved
+  form** from the dak, and again from **Approved Records**
+- Open the two decks and check the sheet pages read clearly — those are the pages that were being
+  shown too small before
 - Try it once on a phone — the layout should reflow to a single column with a menu button
+
+---
+
+## Which files changed in this revision
+
+If the repository is already up, these are the ones to replace — the rest are unchanged:
+
+| File | Why |
+|---|---|
+| `DHS-R1-Prototype.html` | approval outputs, the stamps, the letter's particulars |
+| `DHS-R1-Demo-Presentation.html` · `.pdf` | 43 slides — two added on the approved form and the stamps |
+| `DHS-R1-SCI52-Walkthrough.html` · `.pdf` | 20 slides — sheets now shown at full size |
+| `index.html` · `README.md` | wording for the above |
 
 ---
 

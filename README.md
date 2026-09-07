@@ -15,6 +15,7 @@ sends nothing anywhere. Reloading the page resets it.
 | **The prototype** | [`DHS-R1-Prototype.html`](DHS-R1-Prototype.html) |
 | **Walkthrough deck** | [`DHS-R1-Demo-Presentation.html`](DHS-R1-Demo-Presentation.html) |
 | **Deck as PDF** | [`DHS-R1-Demo-Presentation.pdf`](DHS-R1-Demo-Presentation.pdf) |
+| **One case, step by step** | [`DHS-R1-SCI52-Walkthrough.html`](DHS-R1-SCI52-Walkthrough.html) &middot; [PDF](DHS-R1-SCI52-Walkthrough.pdf) |
 
 Everything is a single self-contained file — it works offline. Download the file and open it in a
 browser if you'd rather not use the hosted page.
@@ -53,7 +54,11 @@ Where an approval asks for a one-time code, use **`123456`**.
   allows; copies are read-only and never enter anyone's pending list.
 - **Fill an SCI form.** *SCI Forms* → new. Use **Side by side** to watch the official sheet fill in as
   you type, then open it at actual size.
-- **Approve something.** Any approval asks for the one-time code.
+- **Approve something.** Any approval asks for the one-time code. The moment it is given, the system
+  writes the **Approval Letter** and a **duly approved copy of every SCI form** — see them on the dak,
+  or in *Approved Records*. The letter sets out the whole of what was approved, since it is the paper
+  handed to the committee; the form stays on the office record, carrying the stamp of every authority
+  in the line.
 - **Change the rules.** As DHS Admin, open *Topics & Workflows* and edit a topic. Tick *value-based*
   to see the approval limits themselves — change a figure, publish, and routing follows at once. Dak
   already in flight keep the version they started under.
@@ -70,7 +75,10 @@ Where an approval asks for a one-time code, use **`123456`**.
 - Reply / forward with recipients and copies, bounded by the dak's route
 - SCI-15, SCI-52 and SCI-02 reproduced in the official format, with print and PDF
 - Inward and outward registers, reports, workflow board, calendar with reminders
-- Approval by one-time code
+- Approval by one-time code — which then issues the approval letter and the approved forms
+- The Approval Letter carries the particulars in full, over the stamp of the final approving authority
+- The approved form carries the stamps of every authority in the line, in the order the dak travelled
+- Approved Records — letters and approved forms kept permanently, open to every office involved
 - Light and dark, and a mobile layout
 
 ## What R1 does not cover
@@ -93,5 +101,23 @@ Where an approval asks for a one-time code, use **`123456`**.
 
 Comments are welcome on anything — wording, sequence, what is missing, and above all whether the
 routing matches how the offices actually work.
+
+---
+
+## What is new in this revision
+
+- **An approval now writes its own papers.** The moment a decision is recorded the system issues an
+  **Approval Letter** and a **duly approved copy of every SCI form** enclosed, without anyone drafting
+  either. Both are kept permanently in **Approved Records**.
+- **The letter carries the decision, not a reference to it.** It is the paper handed to the committee,
+  so on an SCI-52 it sets out who is appointed and on whose bio-data, who continues, who stands
+  relieved, and **the committee as it now reads**. The SCI form stays on the office record.
+- **Every authority in the line is stamped.** One stamp per office — the place that submitted it, each
+  office that recommended it, the office that decided — in the order the dak travelled, each naming a
+  person, a designation and a date. The form's own recommendation boxes are filled in; the rest travel
+  on an endorsement page. The Approval Letter bears the final approving authority's stamp alone.
+- **The sheets in the decks are now shown at full size** — they are the prototype's own A4 pages, so
+  what is on the slide is what the office would hold.
+- A refusal produces the same papers, with the reason recorded.
 
 *September 2026 · Prepared for review by the Zonal Offices and the SCI Office.*
