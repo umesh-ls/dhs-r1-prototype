@@ -16,11 +16,8 @@ sends nothing anywhere. Reloading the page resets it.
 | **Walkthrough deck** | [`DHS-R1-Demo-Presentation.html`](DHS-R1-Demo-Presentation.html) |
 | **Deck as PDF** | [`DHS-R1-Demo-Presentation.pdf`](DHS-R1-Demo-Presentation.pdf) |
 | **One case, step by step** | [`DHS-R1-SCI52-Walkthrough.html`](DHS-R1-SCI52-Walkthrough.html) &middot; [PDF](DHS-R1-SCI52-Walkthrough.pdf) |
-| **The scope, in full** | [`DHS-Scope.pdf`](DHS-Scope.pdf) &middot; [markdown](DHS-Scope.md) |
 
-The scope document is the one to comment on. It is a single document in three parts &mdash; the
-narrative, the register of 304 requirements, and eleven annexures &mdash; and it supersedes the four
-that preceded it. Every requirement carries a mark saying whether this prototype demonstrates it.
+The scope document is **not published here**. It is circulated separately to those reviewing it.
 
 Everything is a single self-contained file — it works offline. Download the file and open it in a
 browser if you'd rather not use the hosted page.
