@@ -10,11 +10,15 @@ publish/
   DHS-R1-Demo-Presentation.pdf        the deck as PDF
   DHS-R1-SCI52-Walkthrough.html       one case followed end to end
   DHS-R1-SCI52-Walkthrough.pdf        the same, as PDF
+  DHS-Scope.pdf                       the scope document, 53 pages
+  DHS-Scope.md                        the same, as markdown
+  DHS-Scope-fig-numbering.png         figures the markdown refers to
+  DHS-Scope-fig-verification.png
   README.md                           shown on the repo page
   .nojekyll                           stops GitHub reprocessing the files
 ```
 
-Eight files, about 7 MB in all. The two decks are the largest, at roughly 2 MB each — they carry the
+Twelve files, about 9 MB in all. The two decks are the largest, at roughly 2 MB each — they carry the
 official sheets as images inside the file itself, so that they read at full size and the file still
 works with no internet connection. GitHub's web upload takes files far larger than this; it is only
 the upload that takes a moment longer.
@@ -100,6 +104,8 @@ If the repository is already up, these are the ones to replace — the rest are 
 | `DHS-R1-Prototype.html` | approval outputs, the stamps, the letter's particulars |
 | `DHS-R1-Demo-Presentation.html` · `.pdf` | 43 slides — two added on the approved form and the stamps |
 | `DHS-R1-SCI52-Walkthrough.html` · `.pdf` | 20 slides — sheets now shown at full size |
+| `DHS-Scope.pdf` · `.md` | the scope document — numbering, the stamps, letter verification |
+| `DHS-Scope-fig-*.png` | the two figures the markdown refers to |
 | `index.html` · `README.md` | wording for the above |
 
 ---

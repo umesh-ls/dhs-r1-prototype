@@ -618,13 +618,18 @@ function rupee(n){ n=Math.round(+n||0); var s=String(n), r=s.length>3?s.slice(0,
 var ITEMS=[], SEQ=140;
 /* ===================== Dak numbering — Annexure E =====================
    MARKER - YYMMDD - NNNN          e.g.  L-260823-0147 , C-260823-0147 , F52-260823-0147
-   · MARKER  L a letter · C a circular · F + the form number for an SCI form
+   · MARKER  a dak takes L (correspondence) or C (circular), from its topic
+   ·          a form takes F + its form number, and keeps it on binding
    · YYMMDD  the date the item was raised — reads almost as before, and sorts correctly
    · NNNN    the running number, unique across India FOR THAT DATE — not counted per office.
              This is what lets any office quote a number and every other office find the item.
    Issued once, at submission. Never re-issued, never changed. Never displayed alone —
    the place, area and subject accompany it wherever it appears.                        */
 function areaCodeOf(off){ var k=off, g=0; while(k && OFF[k] && g++<8){ if(OFF[k].level==='area') return k; k=OFF[k].parent; } return off||'SCI'; }
+/* A dak's marker says which kind of dak it is, and comes from its topic.
+   A form's marker says which form it is. The two never overlap: L or C is a
+   dak, F is a form, so no reference is ambiguous about what it identifies. */
+function dakMarker(t){ return (t && t.circular) ? 'C' : 'L'; }
 function markerFor(o){ o=o||{};
   if(o.circular) return 'C';
   if(o.gen) return 'L';
@@ -701,7 +706,7 @@ function mkItem(pfx, dt, subj, o){ o=o||{};
   var mode=o.mode||'approval', term=o.term||'sci', raiser=o.raiser||'place';
   var chain=chainLevels(raiser, term), step=(o.step!=null?Math.min(o.step,chain.length-1):1);
   var seedOff=o.raiserOff||LVLOFF[raiser]||'LDH1';
-  var it={id:issueNo(markerFor({form:o.form,gen:o.gen,circular:o.circular}), seedOff, new Date()), dt:dt, subj:subj, mode:mode, terminal:term, handoff:o.handoff||'',
+  var it={id:issueNo(dakMarker(o), seedOff, new Date()), dt:dt, subj:subj, mode:mode, terminal:term, handoff:o.handoff||'',
     form:o.form||'', origin:o.origin||'place', raiser:raiser, chain:chain, step:step, raisedAt:d(o.age==null?3:o.age),
     body:'<p>'+(o.body||'This matter is placed before you for consideration and such orders as may be thought fit.')+'</p>',
     atts:o.atts||[], conf:!!o.conf, gen:!!o.gen, paper:!!o.paper, sender:o.sender, value:o.value||0, formData:o.formData||null,
@@ -1175,9 +1180,9 @@ function submitDak(){
   var term=effTerminal(t, formValueSplit());
   var offCh=officeChain(myOffice(), term), ch=offCh.map(function(oc){return OFF[oc].level;});
   var sci15=encl.filter(function(e){return e.code==='SCI-15';})[0];
-  /* one item, one number — if a form was already numbered in the form space, the dak takes that number */
-  var lead=encl.filter(function(e){return e.code===reqForms[0];})[0];
-  var dakNo=(lead&&lead.id)? lead.id : issueNo(markerFor({form:reqForms[0]}), myOffice(), new Date());
+  /* The dak is created from the topic and numbered from it. Every form bound to it
+     keeps the number it was given when it was completed — nothing is adopted. */
+  var dakNo=issueNo(dakMarker(t), myOffice(), new Date());
   var it={id:dakNo,dt:t.dt,subj:t.subj,mode:t.mode,terminal:term,handoff:t.handoff,form:reqForms[0]||'',forms:reqForms,origin:t.origin,prov:t.prov,
     raiser:USERS[me].level,raiserOff:myOffice(),offChain:offCh,zoneOff:(offCh.filter(function(oc){return OFF[oc].level==='zone';})[0]||'ZO2'),chain:ch,step:(ch.length>1?1:0),body:DRAFT.body,atts:DRAFT.atts.slice(),raisedAt:new Date(),
     enclosures:encl,formData:(sci15?sci15.data:null),value:formCost(),natures:(sci15?natureTotals(sci15.data):null),
@@ -1795,7 +1800,7 @@ function submitPaper(){
   if(!P.sender||!P.sender.trim()){ alert('Please record whom it was received from.'); return; }
   if(!P.scan){ alert('The scan of the paper is required — nothing is recorded without it.'); return; }
   var mode=other?'approval':t.mode, term=other?'sci':effTerminal(t,0), handoff=other?'':t.handoff, form=other?'':t.form;
-  var it={id:issueNo(markerFor({form:form}), myOffice(), new Date()),dt:dtName,subj:subjName,mode:mode,paper:true,terminal:term,handoff:handoff,form:form,origin:other?'centre':t.origin,other:other,
+  var it={id:issueNo('L', myOffice(), new Date()),dt:dtName,subj:subjName,mode:mode,paper:true,terminal:term,handoff:handoff,form:form,origin:other?'centre':t.origin,other:other,
     raiser:USERS[me].level,raiserOff:myOffice(),receiver:USERS[me].level,chain:[USERS[me].level],offChain:[myOffice()],step:0,
     sender:P.sender.trim(),recvDate:P.recvDate,atts:[P.scanName||'dak-scan.pdf'],
     body:(P.note?'<p>'+esc(P.note)+'</p>':'')+'<p><i>Received on paper from '+esc(P.sender.trim())+'. The scan is held with the record.</i></p>',

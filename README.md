@@ -16,6 +16,11 @@ sends nothing anywhere. Reloading the page resets it.
 | **Walkthrough deck** | [`DHS-R1-Demo-Presentation.html`](DHS-R1-Demo-Presentation.html) |
 | **Deck as PDF** | [`DHS-R1-Demo-Presentation.pdf`](DHS-R1-Demo-Presentation.pdf) |
 | **One case, step by step** | [`DHS-R1-SCI52-Walkthrough.html`](DHS-R1-SCI52-Walkthrough.html) &middot; [PDF](DHS-R1-SCI52-Walkthrough.pdf) |
+| **The scope, in full** | [`DHS-Scope.pdf`](DHS-Scope.pdf) &middot; [markdown](DHS-Scope.md) |
+
+The scope document is the one to comment on. It is a single document in three parts &mdash; the
+narrative, the register of 304 requirements, and eleven annexures &mdash; and it supersedes the four
+that preceded it. Every requirement carries a mark saying whether this prototype demonstrates it.
 
 Everything is a single self-contained file — it works offline. Download the file and open it in a
 browser if you'd rather not use the hosted page.
@@ -59,6 +64,8 @@ Where an approval asks for a one-time code, use **`123456`**.
   or in *Approved Records*. The letter sets out the whole of what was approved, since it is the paper
   handed to the committee; the form stays on the office record, carrying the stamp of every authority
   in the line.
+- **Watch the numbering.** Raise a dak on a topic that needs an SCI-52. The dak takes an `L-` number
+  of its own; the form keeps its `F52-` number; neither changes when they are bound together.
 - **Change the rules.** As DHS Admin, open *Topics & Workflows* and edit a topic. Tick *value-based*
   to see the approval limits themselves — change a figure, publish, and routing follows at once. Dak
   already in flight keep the version they started under.
@@ -69,7 +76,8 @@ Where an approval asks for a one-time code, use **`123456`**.
 
 - Topic-driven routing — the Document Type and Subject settle the path, the mode, the terminal
   authority, the mandatory forms and the value limits
-- One Dak ID per item — `L-260823-0147`, `F52-260823-0147` — issued at submission, never changed
+- One Dak ID per dak, taken from its topic — `L-260908-0238` correspondence, `C-260908-0233` a circular
+- Every SCI form numbered separately — `F52-260908-0237` — and bound to the dak without either number altering
 - Office-instance scoping — each office sees only its own dak, not everything at its level
 - Roles: signing authority, office staff, read-only, special status, department members, DHS Admin
 - Reply / forward with recipients and copies, bounded by the dak's route
@@ -105,6 +113,10 @@ routing matches how the offices actually work.
 ---
 
 ## What is new in this revision
+
+**A dak is numbered from its topic, not from a form.** A dak takes `L` for correspondence or `C` for a
+circular; every SCI form carries an `F` number of its own and binds to the dak without either number
+altering. So the marker says at once what a reference identifies — `L` or `C` is a dak, `F` is a form.
 
 - **An approval now writes its own papers.** The moment a decision is recorded the system issues an
   **Approval Letter** and a **duly approved copy of every SCI form** enclosed, without anyone drafting
